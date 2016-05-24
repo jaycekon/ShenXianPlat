@@ -1,0 +1,33 @@
+
+/*商品区域*/
+.goodsmsg {
+	margin: 0 auto;
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+	-o-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow:0px 0px 1px rgba(0, 0, 0, 0.1);
+	clear: both;
+}
+
+/*结算功能*/
+.has-choice{
+	font-weight: bold;
+}
+
+.has-choice:hover{
+	cursor: pointer;
+}
+
+.thumbnail{
+	width: 300px;
+	height: 250px;
+	float: left;
+}
+.thumbnail button{
+	width: 100px;
+	
+}
+
+.shopwidth{
+	width: 100%;
+}

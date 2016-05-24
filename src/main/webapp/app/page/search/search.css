@@ -1,0 +1,75 @@
+.classify {
+  width: 100%;
+  background-color: rgba(14, 155, 173, 0.9);
+}
+.classify ul {
+  width: 90%;
+  margin: 0 auto;
+  padding: 5px 0px;
+}
+.classify ul li {
+  display: inline-block;
+  margin-right: 20px;
+}
+.classify ul li a {
+  color: white;
+}
+.classify ul li a:hover,
+.classify ul li a:visited {
+  color: #FFFFFF;
+}
+.bread {
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.bread li {
+  display: inline-block;
+}
+.bread li a {
+  color: #080808;
+}
+.bread li + li:before {
+  content: "> ";
+  vertical-align: middle;
+}
+.sort {
+  width: 100%;
+  height: 33px;
+  padding: 0 50px;
+  background-color: #F8F8F8;
+}
+.sort .item li {
+  float: left;
+  padding: 10px;
+  cursor: pointer;
+}
+.sort .item li:hover {
+  background-color: white;
+}
+.page {
+  float: right;
+  margin: 0px;
+}
+.shop {
+  margin: 0 40px;
+  color: gray;
+}
+.shop > div {
+  float: left;
+  width: 260px;
+  height: 400px;
+  margin: 0 10px;
+}
+.shop .price {
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+}
+.shop button {
+  margin-top: 10px;
+  width: 100%;
+}
+.shop .assess {
+  text-align: right;
+}

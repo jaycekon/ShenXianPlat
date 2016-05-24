@@ -1,0 +1,118 @@
+.setBorder {
+  border: 1px solid #EDEDED;
+  border-radius: 2px;
+}
+.base-topbox {
+  width: 100%;
+  background-color: #f1f1f1;
+}
+.base-topbox .base-small-nav {
+  height: 30px;
+  line-height: 30px;
+  font-size: 11px;
+  margin: 0 50px;
+}
+.base-topbox .base-small-nav > ul {
+  display: inline-block;
+}
+.base-topbox .base-small-nav a {
+  color: gray;
+  padding: 0px 2px;
+}
+.base-nav-item {
+  float: right;
+  line-height: 30px;
+}
+.base-nav-item > li {
+  position: relative;
+  float: left;
+  list-style-type: none;
+  padding: 0px 5px;
+}
+.base-nav-item > li:hover {
+  background-color: white;
+}
+.dropdown-item {
+  position: absolute;
+  top: 30px ;
+  right: 1px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+  width: 80px;
+  background-color: white;
+  z-index: 1;
+}
+.dropdown-item ul {
+  width: 100%;
+}
+.dropdown-item li {
+  padding: 2px;
+  text-align: center;
+  border-bottom: 1px solid #E7E6E6;
+}
+.dropdown-item li:hover {
+  background-color: #f1f1f1;
+}
+.dropdown-item li a {
+  display: inline-block;
+  width: 100%;
+}
+.base-logo-nav {
+  position: relative;
+  height: 100px;
+  width: 100%;
+  background-color: white;
+}
+.base-logo-nav > a {
+  float: left;
+  vertical-align: middle;
+  margin-left: 40px;
+}
+.base-logo-nav > div {
+  position: absolute;
+  float: left;
+  top: 30%;
+}
+.base-logo-nav .base-search {
+  left: 30%;
+}
+.base-logo-nav .base-search .small-search {
+  width: 400px;
+}
+.base-logo-nav .base-search ul {
+  height: 30px;
+}
+.base-logo-nav .base-search ul li {
+  list-style-type: none;
+  float: left;
+  padding: 5px;
+}
+.base-logo-nav .base-search ul li a {
+  color: gray;
+  font-size: 11px;
+}
+.base-logo-nav .base-shopcar {
+  right: 10%;
+  width: 140px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  border: 1px solid #EDEDED;
+  border-radius: 2px;
+  background-color: white;
+}
+.base-logo-nav .base-shopcar:hover {
+  cursor: pointer;
+  background-color: #F8F8F8;
+}
+.base-logo-nav .base-shopcar span {
+  color: #96d3ef;
+}
+.base-logo-nav .base-shopcar .base-badge {
+  background-color: #96d3ef;
+  color: white;
+  position: relative;
+  bottom: 20px;
+}
+.hide {
+  display: none;
+}

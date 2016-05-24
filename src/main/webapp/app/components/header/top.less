@@ -1,0 +1,155 @@
+@background-Color:#F1F1F1;
+@lightColor:#96D3EF;
+@deepColor:#466FFF;
+.setHeight(@height){
+    height: @height;
+    line-height: @height;
+}
+
+.setBorder{
+    border: 1px solid #EDEDED;
+    border-radius: 2px;
+}
+
+.base-topbox{
+   width: 100%;
+   background-color: @background-Color;
+   
+  .base-small-nav{
+    .setHeight(30px);
+    font-size: 11px;
+    margin: 0 50px;
+    
+    >ul{
+        display: inline-block;
+    }
+    
+    a{
+        color: gray;
+        padding: 0px 2px;
+    }
+   }
+}
+
+.base-nav-item{
+        float: right;
+        line-height: 30px;
+        
+        >li{
+            position: relative;
+            float: left;
+            list-style-type: none;
+            padding: 0px 5px;
+            
+            &:hover{
+                background-color: white;
+            } 
+                           
+        }
+    }
+.dropdown-item{
+                 position: absolute;
+                 top:30px ;
+                 right: 1px;
+                 box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+                 width: 80px;
+                 background-color: white;
+                 z-index: 1;
+                 
+                  ul{
+                      width: 100%;
+                  }
+                  li{
+                     padding: 2px;
+                     text-align: center;
+                     border-bottom: 1px solid #E7E6E6;
+                     
+                      &:hover{
+                          background-color: @background-Color;
+                      }
+                      
+                      a{
+                          display: inline-block;
+                          width: 100%;
+                      }
+               }
+}
+
+.base-logo-nav{
+    position: relative;
+    height: 100px;
+    width: 100%;
+    background-color: white;
+
+    
+    >a{
+        float: left;
+        vertical-align:middle;
+        margin-left: 40px;
+    }
+    
+    >div{
+        position: absolute;
+        float: left;
+        top: 30%;
+    }
+    
+    .base-search{
+        left: 30%;
+        
+        .small-search{
+            width: 400px;
+        }
+        
+        ul{
+            height: 30px;
+            
+             li{
+               list-style-type: none;
+               float: left;
+               padding: 5px;
+               
+                a{
+                   color: gray;
+                   font-size: 11px;
+                }
+               }
+        }
+    }
+    .base-shopcar{
+        right: 10%;
+        width: 140px;
+        .setHeight(35px);
+        text-align: center;
+        .setBorder;
+        background-color:white;
+        
+        &:hover{
+            cursor: pointer;
+            background-color: #F8F8F8;
+        }
+        span{
+            color: @lightColor;
+        }
+        .base-badge{
+            background-color:@lightColor;
+            color: white;
+            position: relative;
+            bottom: 20px;
+        }
+    }
+}
+
+.hide{
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+

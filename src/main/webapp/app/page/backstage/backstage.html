@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"/>
+	<title>后台管理系统</title>
+	<link rel="stylesheet" href="app/components/css/regular.css" />
+	<link rel="stylesheet" href="app/components/css/bootstrap.css" />
+	<link rel="stylesheet" href="app/page/backstage/backstage.css" />
+</head>
+
+<body>
+<input type="hidden" id="s-delete" value=""/>
+<input type="hidden" id="s-edit" value=""/>
+
+<div class="g-center">
+	<!--侧边导航区域-->
+	<div class="c-left col-xs-3 text-center">
+		<div class="c-img">
+			<img width="80px" height="80px">
+					<span>
+					<span>admin,欢迎你  </span>
+					<a href="/flow/background/logout">
+						<span class="glyphicon glyphicon-off"></span> 注销
+					</a>
+					<a href="/flow/background/changepass">
+						<span class="glyphicon glyphicon-off"></span> 修改密码
+					</a>
+					</span>
+		</div>
+		<div class="c-sidebar">
+			<ul class="nav nav-pills nav-stacked">
+				<li role="presentation" class="c-leadbox2"><a href="/flow/background/goods"><span
+						class=" glyphicon glyphicon-file"></span>商品管理</a></li>
+			</ul>
+			<ul class="nav nav-pills nav-stacked">
+				<li role="presentation" class="c-leadbox2"><a href="/flow/background/record"><span
+						class=" glyphicon glyphicon-file"></span>充值记录</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="panel panel-primary c-setborder col-xs-9" id="c-box1">
+		<div class="panel-heading">
+			<div class="c-searchmain input-group col-xs-5">
+				<input type="text" class="form-control " placeholder="请输入查找内容"/>
+					<span class="input-group-btn">
+                					<button class="btn btn-primary" type="button"><span
+											class="glyphicon glyphicon-search"></span> 查询
+									</button>
+					</span>
+			</div>
+			<a class="btn btn-primary btn-sm add-but" href="#" data-toggle="modal" data-target="#adddaily"><span
+			class="glyphicon glyphicon-plus"></span> 添加</a>
+		</div>
+		<div class="panel-body">
+			<table class="table c-miancontent table-striped  table-bordered">
+				<thead>
+				<tr style="font-weight: bold;">
+					<td class="hide">id</td>
+					<td>流量名称</td>
+					<td>流量详情</td>
+					<td>商品价钱</td>
+					<td>商品编号</td>
+					<td>所属地</td>
+					<td>运营商</td>
+					<td>流量商</td>
+					<td>操作</td>
+				</tr>
+				</thead>
+				<tbody id="detailMsg" tmpl="detail-tmpl">
+				<!--此处用于存放数据-->
+				<script type="text/html" id="detail-tmpl">
+					{@each list as item}
+					<tr>
+						<td class="hide">${item.id}</td>
+						<td>${item.title}</td>
+						<td>${item.detail}</td>
+						<td>${item.price}元</td>
+						<td>${item.code}</td>
+						<td>${item.belong}</td>
+						<td>${item.carrier}</td>
+						<td>${item.operator}</td>
+						<td>
+							<a class="btn btn-primary btn-sm sendDelete" href="#" data-toggle="modal"
+							   data-target="#c-worn"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+							<a class="btn btn-primary btn-sm sendEdit" href="#" data-toggle="modal"
+							   data-target="#editdaily"><span class="glyphicon glyphicon-pencil"></span> 编辑</a>
+						</td>
+					</tr>
+					{@/each}
+				</script>
+				</tbody>
+			</table>
+		</div>
+		<div class="panel-footer">
+			<nav class="c-page">
+				<ul class="pagination">
+					<li><a href="#">首页</a></li>
+					<li>
+						<a href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li>
+						<a href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+					<li><a href="#">尾页</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<!--添加弹出框-->
+<div class="modal fade bs-example-modal-sm" id="adddaily">
+	<div class="modal-dialog modal-sm conte">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+						aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">添加流量类型</h4>
+			</div>
+			<div class="modal-body">
+				<p>
+					<label>标题:</label>
+					<input type="text" placeholder="请输入流量名称" class="textUrl"/>
+				</p>
+
+				<p>
+					<label>详情：</label>
+					<input type="text" placeholder="请输入详情" class="textUrl"/>
+				</p>
+
+				<p><label>价钱：</label>
+					<input type="text" placeholder="请输入价格" class="textUrl"/>
+				</p>
+
+				<p>
+					<label>商品代码：</label>
+					<input type="text" placeholder="请输入商品代码" class="textUrl"/>
+				</p>
+
+				<p>
+					<label>所属地：</label>
+					<select>
+						<option>广东</option>
+						<option>全国</option>
+					</select>
+				</p>
+				<p>
+					<label>运营商：</label>
+					<select>
+						<option>移动</option>
+						<option>联通</option>
+						<option>电信</option>
+					</select>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary sureadd" data-dismiss="modal">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--编辑弹出框-->
+<div class="modal fade bs-example-modal-sm" id="editdaily">
+	<div class="modal-dialog modal-sm conte">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+						aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">编辑日志</h4>
+			</div>
+			<div class="modal-body">
+				<p>
+					<label>标题:</label>
+					<input type="text" placeholder="请输入流量名称" class="textUrl"/>
+				</p>
+				<p>
+				<label>详情：</label>
+				<input type="text" placeholder="请输入详情" class="textUrl"/>
+				</p>
+				<p>
+				<label>价钱：</label>
+				<input type="text" placeholder="请输入价格" class="textUrl"/>
+				</p>
+				<p>
+				<label>商品代码：</label>
+				<input type="text" placeholder="请输入商品代码" class="textUrl"/>
+				</p>
+				<p>
+				<label>所属地：</label>
+				<select>
+				<option name="广东">广东</option>
+				<option name="全国">全国</option>
+				</select>
+				</p>
+				<p>
+				<label>运营商：</label>
+				<select>
+				<option name="移动">移动</option>
+				<option name="联通">联通</option>
+				<option name="电信">电信</option>
+				</select>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id="update">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--弹出删除框-->
+<div class="modal fade bs-example-modal-sm" id="c-worn">
+	<div class="modal-dialog modal-sm conte">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+						aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">信息删除</h4>
+			</div>
+			<div class="modal-body">
+				<input type="hidden">确定删除吗？
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-danger dailydelect" data-dismiss="modal">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="app/components/js/jquery.min.js"></script>
+<script src="app/components/js/juicer-min.js"></script>
+<script src="app/components/js/bootstrap.min.js"></script>
+<script src="app/page/backstage/backstage.js "></script>
+</script>
+
+</body>
+
+</html>

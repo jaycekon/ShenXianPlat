@@ -1,0 +1,272 @@
+@font-color:#757575;
+@graybg:#F7F7F7;
+@lightColor:#789FFF;
+@deepColor:#466FFF;
+
+.flex{
+    display: -webkit-flex; /* Safari */
+    display: flex;
+}
+
+.display{
+    margin: 0 100px;
+}
+
+.ccontainer{
+    height: 440px;
+    
+    >div{
+        float: left;
+    }
+}
+//面包屑导航
+.crumbadd{
+   padding: 8px 50px;
+   
+   a{
+    color: #8D8D8D;
+   }
+}
+
+//商品展示信息
+.leftImg{
+    width: 375px;
+    height: 400px;
+}
+.chooseImg{
+    .flex;
+    width: 375px;
+    height: 65px;
+    
+    >img{
+        width: 55px;
+        height: 55px;
+        margin: 0px 3px;
+        cursor: pointer;
+        
+        &:hover{
+            border: 1px solid gainsboro;
+        }
+    }
+}
+
+.centerMsg{
+    width: 625px;
+    height: 440px;
+    
+    >div{
+        padding: 0px 15px;
+        margin: 30px 0px;
+        color: @font-color;
+    }
+}
+
+#shop-data{
+    margin: 20px 0px;
+    
+    h4{
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+}
+
+.labe{
+    display: inline-block;
+    width: 60px;
+}
+//商品价格
+.showPrice{
+    background-color: @graybg;
+    padding:15px 0px 15px 15px !important;
+    
+    h5{
+        display: block;
+    }
+    
+    .uptodayCommon{
+        float: right;
+        padding: 0px 15px;
+    }
+    
+    .uptodayPrize{
+        color: red;
+        font-weight: bold;
+        font-size: 22px;
+    }
+}
+//选择类型
+.chooseSize{
+      width: 370px;
+      height: 40px;
+      
+      h6{
+        float: left;
+        padding: 8px 0px;
+      }
+      
+      ul >li{
+        float: left;
+        padding: 5px;
+        border: 1px solid darkgray;
+        margin: 0 5px;
+     }
+      
+      ul >li:hover{
+          cursor: pointer;
+          border-color:red ;
+      }
+ } 
+ 
+.Size-active{
+    border: 1px solid red !important;
+    color: red;
+}
+//选择配送地址
+.choosePlace{
+    position: relative;
+    
+   .activePlace{
+     padding:5px 10px;
+     margin-right: 5px;
+     border:1px solid gray; 
+      
+     &:hover{
+         cursor: pointer;
+     } 
+   }
+   
+   .dropdownPlace{
+       border: 1px solid gray;
+       position: absolute;
+       left: 79px;
+       top:22px;
+       
+       
+       li{
+           width: 70px;
+           padding: 5px 0px;
+           text-align: center;
+           background-color: @lightColor;
+           color: white;   
+           
+           &:hover{
+               cursor: pointer;
+               background-color: @deepColor;
+           }
+       }
+   }   
+}
+//购买数量
+.num{
+    display: inline-block;
+    margin-right: 10px;
+    
+    input{
+       display: inline-block;
+       width: 50px !important;  
+    }
+}
+
+/*用户评价*/
+h3{
+    clear: both;
+    color: #393333;
+    margin: 15px 0px 15px 15px;
+    text-shadow: 0 0 3px #B7B7B7;
+}
+
+.mark{
+    background-color: rgba(251, 251, 251, 0.8);
+    border-radius: 3px;
+    
+    li{
+        border-bottom: solid 1px #DCDCDC;
+          
+        &:after{
+            content: "";
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+        
+        a{
+            display: inline-block;
+            color: #262626;  
+            
+            img{
+              width: 70px;
+              height: 70px;
+              border-radius: 50%;  
+            }
+        }
+        
+        h5{
+            padding-top: 15px;
+        }
+        
+        p{
+            max-height: 180px;
+            text-indent: 2em;
+            overflow: hidden;
+            margin: 10px 0px; 
+        }
+    }
+    
+    .pic{
+        width: 70px;
+        height: 70px;
+        float: left;
+        margin: 10px 15px 10px 5px;
+    }
+}
+.date {
+    display: block;
+    float: right;
+    margin-right: 10px;
+    color: #999999;
+}
+//商品介绍
+.detail-text{
+    border: 1px solid rgb(239, 239, 239);
+    padding: 5px 0px;
+    
+    ul{
+        width: 100%;
+        height: 40px;
+        
+        li{
+            float: left;
+            padding: 10px 30px;
+        }
+    }
+}
+.detail-img{
+    margin: 0 130px;
+    
+    img{
+        border-bottom: 1px dashed #F0F0F0;
+    }
+}
+//分页按钮
+
+.pager{
+    li a{
+        border: none;
+        color: white;
+        background-color: rgba(3, 101, 192, 0.6);
+        
+        &:hover{
+          background-color: rgba(3, 101, 192, 0.7);
+        }
+    }
+}
+
+
+.hide{
+    display: none;
+}
+.fixtop{
+    position: fixed;
+    top:0px;
+    background-color: #F5F5F5;
+}

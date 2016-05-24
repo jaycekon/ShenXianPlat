@@ -1,0 +1,71 @@
+.top {
+  width: 100%;
+  height: 80px;
+}
+.center {
+  height: 400px;
+  width: 100%;
+  margin-bottom: 30px;
+  background-color: #edffdd;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.center .container {
+  width: 1000px;
+  height: 400px;
+  margin: 0 auto;
+}
+.center .container > div {
+  float: left;
+}
+.center .container .adver {
+  margin-top: 80px;
+}
+.center .container .loginBox {
+  margin: 50px 0px 0px 140px;
+  width: 320px;
+  height: 280px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+}
+form a {
+  color: #5cb85c !important;
+}
+form a:hover {
+  text-decoration: underline;
+}
+form h3 span {
+  float: right;
+  font-size: 14px;
+  line-height: 36px;
+}
+form div {
+  margin: 20px 0px;
+}
+form input[type=submit] {
+  width: 280px;
+}
+form .lo-agree a {
+  float: right;
+}
+form .lo-color {
+  background-color: #edffdd;
+  color: #5cb85c;
+}
+.b-bar {
+  width: 100%;
+  line-height: 30px;
+  background-color: #07A71A;
+}
+.b-bar a {
+  color: white;
+}
+.b-bar div {
+  width: auto;
+  height: 30px;
+  display: inline-block;
+  margin-left: 360px;
+}
+.b-bar div span {
+  padding: 0 5px;
+}

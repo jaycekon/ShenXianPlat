@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title> </title>
+		<link rel="stylesheet" href="../../components/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../components/css/font-awesome.css" />
+		<link rel="stylesheet" href="../../components/css/regular.css" />
+		<link rel="stylesheet" href="search.css" / </head>
+
+		<body>
+			<div id="top"></div>
+			<div class="content">
+				<div class="classify">
+					<ul>
+						<li><a href="index.html">首页</a></li>
+						<li><a href="#">分类</a></li>
+					</ul>
+				</div>
+				<div class="sort">
+					<!--<ul class="bread">
+						<li><a href="#">所有</a></li>
+						<li><a href="#">共10002件</a></li>
+					</ul>-->
+					<div class="small-nav">
+						<ul class="item">
+							<li>综合排序</li>
+							<li>价格</li>
+							<li>销量</li>
+						</ul>
+						<ul class="pagination page">
+							<li><a href="#">&laquo; 上一页</a></li>
+							<li><a href="#">下一页 &raquo;</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="shop" id="shop-data" tmpl="shop-tmpl">
+					<script type="text/html" id="shop-tmpl">
+						{@each list as p}
+						<div>
+							<a href="#"><img src="../../components/img/shop/shop1-2.jpg" width="260px" ;height="235px" /></a>
+							<h5>${p.title}</h5>
+							<span class="price">${p.price}</span>
+							<h5 class="assess">已有<span>${p.commoNum}</span>人评价</h5>
+							<button type="button" class="btn btn-primary">加入购物车</button>
+						</div>
+						{@/each}
+					</script>
+				</div>
+			</div>
+			<script src="../../components/js/jquery.min.js"></script>
+			<script src="../../components/js/bootstrap.min.js"></script>
+			<script src="../../components/js/juicer-min.js"></script>
+			<script src="search.js"></script>
+		</body>
+
+</html>

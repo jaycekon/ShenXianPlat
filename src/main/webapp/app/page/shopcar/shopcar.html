@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="myshopping" lang="en">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>我的购物车</title>
+		<link rel="stylesheet"  href="../app/components/css/font-awesome.css" />
+		<link rel="stylesheet"  href="../app/components/css/bootstrap.css" />
+		<link rel="stylesheet"  href="../app/components/css/regular.css" />
+		<link rel="stylesheet"  href="../app/page/shopcar/shopcar.css" />
+
+	</head>
+
+	<body>
+		<!--头部区域-->
+                <a href="shopcar.html"></a>
+		<div ng-controller="shopcar">
+			<table class="goodsmsg">
+				<thead>
+					<tr>
+						<td></td>
+						<td>商品信息</td>
+						<td></td>
+						<td>单价</td>
+						<td>数量</td>
+						<td>金额（元）</td>
+						<td>操作</td>
+					</tr>
+				</thead>
+				<tbody>
+					<!--	此处用于从后台提取信息,存放商品信息-->
+					<tr ng-repeat="x in goods">
+						<td>
+							<input type="checkbox" ng-checked="selectAll" />
+						</td>
+						<td>
+							<a href="javascript:;"><img src="../app/page/shopcar/shop{{x.imgId}}.jpg"><span ng-bind="x.msg"></span></a>
+						</td>
+						<td ng-bind="x.detailMsg"></td>
+						<td ng-bind="x.price|currency"></td>
+						<td>
+							<div class="btn-group">
+								<input class="btn btn-default" type="button" value="-" ng-click="change($index,1)" />
+								<input class="form-control" type="text" ng-model="x.count" style="width: 50px;float: left;" />
+								<input class="btn btn-default" type="button" value="+" ng-click="change($index,-1)" />
+							</div>
+						</td>
+						<td ng-bind="x.price*x.count|currency"></td>
+						<td>
+							<p>
+								<input class="btn btn-default" type="button" value="移入收藏夹" />
+							</p>
+							<p>
+								<input class="btn btn-default" type="button" value="删除" ng-click="remove($index)" />
+							</p>
+						</td>
+					</tr>
+					<!--结算，全选-->
+					<tr>
+						<td>
+							<label for="all">
+								<input type="checkbox" id="all" ng-model="selectAll">全选
+							</label>
+						</td>
+						<td>
+							<div class="btn-group">
+								<input class="btn btn-default" type="button" value="删除" />
+								<input class="btn btn-default" type="button" value="移入收藏夹" />
+							</div>
+						</td>
+						<td class="has-choice">
+							已选商品<span> 2 </span>件<span class="glyphicon glyphicon-chevron-up"></span>
+						</td>
+						<td>
+							合计：<span>60.89</span>
+						</td>
+						<td>
+							<input class="btn btn-default" type="submit" value="结算">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		<!--底部版权区域-->	
+
+		<script src="../app/components/js/angular.min.js"></script>
+		<script src="../app/components/js/angular-route.min.js"></script>
+		<script src="../app/page/regular.js"></script>
+
+	</body>
+</html>
