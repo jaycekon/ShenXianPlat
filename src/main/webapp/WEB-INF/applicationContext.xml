@@ -20,9 +20,9 @@
     <!-- 配置datasource 也就是对于数据可链接的配置 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://121.42.190.17:3306/Shop"/>
-        <property name="username" value="beidan"/>
-        <property name="password" value="1025Beidan"/>        <!-- 数据库用户账号和密码 -->
+        <property name="url" value="jdbc:mysql://localhost:3306/Shop"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>        <!-- 数据库用户账号和密码 -->
         
         <!-- 配置连接池的一些属性 -->
         <property name="initialSize" value="1" /><!-- 初始化连接数量 --> 
@@ -97,12 +97,18 @@
     </bean>
     
     <bean id="userDao" class="com.Shop.dao.UserDao" parent="daoTemplate"/>
+    <bean id="addressDao" class="com.Shop.dao.AddressDao" parent="daoTemplate"/>
+    <bean id="cartDao" class="com.Shop.dao.CartDao" parent="daoTemplate"/>
+    <bean id="cateDao" class="com.Shop.dao.CateDao" parent="daoTemplate"/>
+    <bean id="productDao" class="com.Shop.dao.ProductDao" parent="daoTemplate"/>
+    <bean id="orderDao" class="com.Shop.dao.OrdersDao" parent="daoTemplate"/>
+    <bean id="orderProductDao" class="com.Shop.dao.OrderProductDao" parent="daoTemplate"/>
 
     
     
     <bean id="userService" class="com.Shop.service.UserService">
-        <property name="userDao" ref="userDao"/>
-
+    </bean>
+    <bean id="goodService" class="com.Shop.service.GoodService">
     </bean>
 
 

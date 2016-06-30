@@ -7,25 +7,10 @@ package com.Shop.service;
 
 import com.Shop.beans.User;
 import com.Shop.dao.UserDao;
-import com.Shop.utils.Pager;
-
-/**
- *
- * @author cjh
- */
+import org.springframework.beans.factory.annotation.Autowired;
 public class UserService {
-
+    @Autowired
     private UserDao userDao;
-
-    
-    
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
 
 
 
@@ -35,7 +20,7 @@ public class UserService {
      *
      *************************************************************************/
     public void addUser(User user){
-       userDao.addUser(user);
+       userDao.addAnyType(user);
     }
     
     /**
@@ -77,12 +62,10 @@ public class UserService {
     }
     
     public void updateUser(User user){
-        userDao.updateUser(user);
+        userDao.updateAnyType(user);
     }
     
-    public Pager listUser(Pager pager){
-        return userDao.getAllUser(pager);
-    }
+
     
 
 }

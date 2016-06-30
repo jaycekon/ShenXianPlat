@@ -16,10 +16,15 @@
     <!-- 指明要扫描的controller所在位置 -->
     <context:component-scan base-package="com.Shop.controller"/>
     <!-- 制定一个文件夹用于放置css、js文件 -->
-    <mvc:resources mapping="/app/**" location="/app/"/>
-    
+    <mvc:resources mapping="/App/source/**" location="/App/source/"/>
+    <mvc:resources mapping="/js/**" location="/App/source/js/"/>
+    <mvc:resources mapping="/css/**" location="/App/source/css/"/>
+    <mvc:resources mapping="/fonts/**" location="/App/source/fonts/"/>
+    <mvc:resources mapping="/source/**" location="/App/source/"/>
+    <!--<mvc:resources mapping="/App/source/**" location="/App/,/App/source/"/>-->
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/app/page/"/>
+        <property name="prefix" value="/App/source/"/>
         <property name="suffix" value=".html"/>
     </bean>
 </beans>

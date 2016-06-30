@@ -8,14 +8,9 @@ package com.Shop.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-/**
- *
- * @author cjh
- */
 public class BaseDao {
     
     private SessionFactory sessionFactory;
-
     public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
@@ -25,7 +20,10 @@ public class BaseDao {
 
     }
 
-    protected Session getSession() {
-        return getSessionFactory().getCurrentSession();
+    protected  Session openSession() {
+        return getSessionFactory().openSession();
     }
+
+
+
 }

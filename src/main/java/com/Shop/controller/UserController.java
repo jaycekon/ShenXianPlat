@@ -7,17 +7,13 @@ package com.Shop.controller;
 
 import com.Shop.beans.User;
 import com.Shop.service.UserService;
-import com.Shop.utils.Pager;
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,23 +26,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
-//@SessionAttributes("loginUser")
 public class UserController {
 
-    @Resource(name = "userService")
+    @Autowired
     private UserService userService;
 
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
     
     @RequestMapping(value="/")
     public String index(){
-        return "index/index";
+        return "index";
     }
     /**
      * 添加用户
@@ -56,7 +44,7 @@ public class UserController {
      */
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String addUser(Model model) {
-        return "register/register";
+        return "register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -90,7 +78,14 @@ public class UserController {
     
     @RequestMapping(value="/index")
     public String index1(){
-        return "index/index";
+        System.out.println("123");
+        return "extend";
+    }
+
+    @RequestMapping(value="/test")
+    public String test1(){
+        System.out.println("123");
+        return "tmp/index";
     }
 
     /**
@@ -99,7 +94,7 @@ public class UserController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginUser(Model model) {
-        return "login/login";
+        return "login";
     }
     
     
@@ -121,9 +116,9 @@ public class UserController {
     @RequestMapping(value = "/user/update", method = RequestMethod.GET)
     public String updateUser(Model model, @ModelAttribute("loginUser") User loginUser) {
         if (loginUser == null) {
-            return "user/login";
+            return "login";
         }
-        return "user/update";
+        return "update";
     }
 
     @RequestMapping(value = "/user/update", method = RequestMethod.POST)
@@ -180,23 +175,6 @@ public class UserController {
     @RequestMapping(value="/users")
     public String test(){
         return "index";
-    }
-    
-    @ResponseBody
-    @RequestMapping(value="/test")
-    public List getUserList(HttpServletResponse response){
-        Map<String, Object> map = new HashMap<>();
-        response.setContentType("application/json");
-        Pager pager = new Pager();
-        pager.setOffset(0);
-        pager.setMaxPageSize(7);
-
-        pager=userService.listUser(pager);
-        List list =pager.getDatas();
-        System.out.println("-----------");
-        System.out.println(pager.getDatas().toString());
-        map.put("list",list);
-        return pager.getDatas();
     }
 
     @RequestMapping(value="/test/{name}", method = RequestMethod.GET)
