@@ -5,12 +5,17 @@
  */
 package com.Shop.service;
 
+import com.Shop.beans.Cart;
 import com.Shop.beans.User;
+import com.Shop.dao.CartDao;
 import com.Shop.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 public class UserService {
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private CartDao cartDao;
+
 
 
 
@@ -66,6 +71,8 @@ public class UserService {
     }
     
 
-    
+    public Cart findCartByUserId(int userId){
+        return cartDao.findByUserId(userId);
+    }
 
 }

@@ -5,14 +5,24 @@
  */
 package com.Shop.controller;
 
+import com.Shop.Util.AddressPojo;
+import com.Shop.Util.OrdersPojo;
+import com.Shop.beans.Address;
+import com.Shop.beans.Citys;
+import com.Shop.beans.Orders;
 import com.Shop.beans.User;
+import com.Shop.service.AddressService;
+import com.Shop.service.OrderService;
 import com.Shop.service.UserService;
 import java.io.File;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,12 +40,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private OrderService orderService;
+    Logger log = Logger.getLogger(this.getClass());
 
-    
-    @RequestMapping(value="/")
-    public String index(){
-        return "index";
-    }
     /**
      * 添加用户
      *
@@ -47,7 +57,7 @@ public class UserController {
         return "register";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String addUser(User user) {
         JsonObject object = new JsonObject();
@@ -76,17 +86,13 @@ public class UserController {
         return "redirect:addUser";
     }
     
-    @RequestMapping(value="/index")
+    @RequestMapping(value="/",method=RequestMethod.GET)
     public String index1(){
+        log.info("123");
         System.out.println("123");
         return "extend";
     }
 
-    @RequestMapping(value="/test")
-    public String test1(){
-        System.out.println("123");
-        return "tmp/index";
-    }
 
     /**
      * 登录用户
@@ -107,83 +113,81 @@ public class UserController {
 //            model.addAttribute("loginUser", u);
              session.setAttribute("loginUser", u);
         }
-        return u ;
+        return u;
     }
 
-    /**
-     * 修改用户信息
-     */
-    @RequestMapping(value = "/user/update", method = RequestMethod.GET)
-    public String updateUser(Model model, @ModelAttribute("loginUser") User loginUser) {
-        if (loginUser == null) {
-            return "login";
+    @RequestMapping(value = "/addAddress", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String addAddress(Address address, Citys citys, HttpSession session){
+//        User user = (User)session.getAttribute("loginUser");
+        User user = userService.loadUser(1);
+        JsonObject jsonObject = new JsonObject();
+        if(user ==null){
+            jsonObject.addProperty("status",false);
+            jsonObject.addProperty("message","用户未登录");
+            return jsonObject.toString();
         }
-        return "update";
+        address.setUserId(user.getId());
+        if(citys!=null)
+        address.setArea(citys.getPro()+citys.getName());
+        addressService.addAddress(address);
+        jsonObject.addProperty("status",true);
+        return jsonObject.toString();
     }
 
-    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
-    public String updateUser(@ModelAttribute("loginUser") User loginUser, String password, String Email, String sex, String nickname, @RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
-        loginUser.setEmail(Email);
-        loginUser.setSex(sex);
-        loginUser.setNickname(nickname);
-        loginUser.setPassword(password);
+    @RequestMapping(value = "/deleteAddress", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String deleteAddress(int id){
+        String json = addressService.deleteAddress(id);
+        return json;
+    }
 
-        if (file != null) {
-            String path = request.getSession().getServletContext().getRealPath("app/img/user");
-            String fileName = file.getOriginalFilename();
-            File targetFile = new File(path, fileName);
-            if (targetFile.exists()) {
-                targetFile.mkdirs();
-            }
-            try {
-                file.transferTo(targetFile);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            loginUser.setImg(fileName);
+
+    @RequestMapping(value = "/addressDetail", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String addressDetail(int id){
+        Address address  = addressService.findAddressById(id);
+        Gson gson =new Gson();
+        return gson.toJson(address);
+    }
+
+
+    @RequestMapping(value = "/listAddress", method = RequestMethod.POST)
+    @ResponseBody
+    public AddressPojo listAddress(HttpSession session){
+        User user = (User)session.getAttribute("loginUser");
+        AddressPojo addressPojo = new AddressPojo();
+        if(user ==null){
+           return null;
         }
-        userService.updateUser(loginUser);
-        return "user/update";
+        List<Address> addresses = addressService.findAddressByUuserId(user.getId());
+        addressPojo.setAddresses(addresses);
+        return addressPojo;
     }
-    
-    /**
-     * 测试json
-     */
-//    @RequestMapping(value="/test")
-//    public String testJson(){
-//        return "user/test";
-//    }
-//    
-//    @RequestMapping("/json")
-//    public void showInfoJson(User user, HttpServletRequest request,
-//        HttpServletResponse response) {
-//    String result =
-//        "{\"name\":\""+user.getPhone()+"\",\"pwd\":\""+user.getPassword()+"\"}";//user
-//        //接到前台传到的数据，并拼接成新的json对象 
-//    response.setContentType("application/json");//设置response的传输格式为json 
-//    System.out.println(result); 
-//    try { 
-//         PrintWriter out = response.getWriter(); 
-//         out.write(result);//给页面上传输json对象 
-//    } catch (IOException e) { 
-//         e.printStackTrace(); 
-//    } 
-//}   
-
-
-    
-    @RequestMapping(value="/users")
-    public String test(){
-        return "index";
+    @RequestMapping(value = "/CreateOrder", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String createOrder(HttpSession session,int addressId){
+//        User user =(User)session.getAttribute("loginUser");
+        User user = userService.loadUser(1);
+        Address address = addressService.findAddressById(addressId);
+        orderService.addOrders(user.getId(),address);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("status",true);
+        return jsonObject.toString();
     }
 
-    @RequestMapping(value="/test/{name}", method = RequestMethod.GET)
-    public @ResponseBody User getShopInJSON(@PathVariable String name,HttpServletResponse response) {
-        User user=new User();
-        user.setNickname(name);
 
-
-        return user;
-
+    @RequestMapping(value = "/listOrders", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public OrdersPojo listOrders(HttpSession session){
+        User user=(User)session.getAttribute("loginUser");
+        if(user==null){
+            return null;
+        }
+        List<Orders> orderses = orderService.findOrdersByUserId(user.getId());
+        OrdersPojo ordersPojo = new OrdersPojo();
+        ordersPojo.setOrderses(orderses);
+        return ordersPojo;
     }
+
 }

@@ -21,7 +21,7 @@
     <mvc:resources mapping="/css/**" location="/App/source/css/"/>
     <mvc:resources mapping="/fonts/**" location="/App/source/fonts/"/>
     <mvc:resources mapping="/source/**" location="/App/source/"/>
-    <!--<mvc:resources mapping="/App/source/**" location="/App/,/App/source/"/>-->
+    <mvc:resources mapping="/App/source/**" location="/App/,/App/source/"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/App/source/"/>

@@ -20,9 +20,9 @@
     <!-- 配置datasource 也就是对于数据可链接的配置 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/Shop"/>
-        <property name="username" value="root"/>
-        <property name="password" value="root"/>        <!-- 数据库用户账号和密码 -->
+        <property name="url" value="jdbc:mysql://121.42.190.17:3306/Shop"/>
+        <property name="username" value="beidan"/>
+        <property name="password" value="1025Beidan"/>        <!-- 数据库用户账号和密码 -->
         
         <!-- 配置连接池的一些属性 -->
         <property name="initialSize" value="1" /><!-- 初始化连接数量 --> 
@@ -77,6 +77,7 @@
             <tx:method name="add*" propagation="REQUIRED"/>
             <tx:method name="del*" propagation="REQUIRED"/>
             <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="remove*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
     
@@ -103,13 +104,17 @@
     <bean id="productDao" class="com.Shop.dao.ProductDao" parent="daoTemplate"/>
     <bean id="orderDao" class="com.Shop.dao.OrdersDao" parent="daoTemplate"/>
     <bean id="orderProductDao" class="com.Shop.dao.OrderProductDao" parent="daoTemplate"/>
+    <bean id="provinceDao" class="com.Shop.dao.ProvinceDao" parent="daoTemplate"/>
+    <bean id="citysDao" class="com.Shop.dao.CitysDao" parent="daoTemplate"/>
 
     
     
-    <bean id="userService" class="com.Shop.service.UserService">
-    </bean>
-    <bean id="goodService" class="com.Shop.service.GoodService">
-    </bean>
+    <bean id="userService" class="com.Shop.service.UserService"></bean>
+    <bean id="goodService" class="com.Shop.service.GoodService"></bean>
+    <bean id="buyService" class="com.Shop.service.BuyService"></bean>
+    <bean id="backStageService" class="com.Shop.service.BackStageService"></bean>
+    <bean id="addressService" class="com.Shop.service.AddressService"></bean>
+    <bean id="orderService" class="com.Shop.service.OrderService"></bean>
 
 
 
