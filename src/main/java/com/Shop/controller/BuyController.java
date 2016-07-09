@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -29,9 +30,14 @@ public class BuyController {
 
     @RequestMapping(value="buyGood",method= RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String buyGood(int id, int count, HttpSession session){
+    public String buyGood(int id, int count, HttpSession session,HttpServletRequest request){
 //        User loginUser = (User)session.getAttribute("loginUser");
         User loginUser = userService.loadUser(1);
+        if(request.getParameter("phone")!=null){
+            String phone = request.getParameter("phone");
+            String password = request.getParameter("password");
+            loginUser = userService.loginUser(phone,password);
+        }
         JsonObject jsonObject = new JsonObject();
         if(loginUser ==null){
             jsonObject.addProperty("status",false);
