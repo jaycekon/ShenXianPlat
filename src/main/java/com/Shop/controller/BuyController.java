@@ -31,12 +31,13 @@ public class BuyController {
     @RequestMapping(value="buyGood",method= RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String buyGood(int id, int count, HttpSession session,HttpServletRequest request){
-//        User loginUser = (User)session.getAttribute("loginUser");
-        User loginUser = userService.loadUser(1);
-        if(request.getParameter("phone")!=null){
-            String phone = request.getParameter("phone");
-            String password = request.getParameter("password");
-            loginUser = userService.loginUser(phone,password);
+        User loginUser=new User();
+        if(session.getAttribute("loginUser")!=null){
+            loginUser = (User)session.getAttribute("loginUser");
+        }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
+                String phone = request.getParameter("phone");
+                String password = request.getParameter("password");
+                loginUser = userService.loginUser(phone,password);
         }
         JsonObject jsonObject = new JsonObject();
         if(loginUser ==null){
@@ -64,12 +65,22 @@ public class BuyController {
         return json;
     }
 
-    @RequestMapping(value="myCart",method = RequestMethod.GET)
+    @RequestMapping(value="myCart",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public CartPojo myCart(HttpSession session){
-//        User user= (User)session.getAttribute("loginUser");
-        User user = userService.loadUser(1);
-        Cart cart = userService.findCartByUserId(user.getId());
+    public CartPojo myCart(HttpSession session,HttpServletRequest request){
+        User loginUser=new User();
+        if(session.getAttribute("loginUser")!=null){
+            loginUser = (User)session.getAttribute("loginUser");
+        }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
+            String phone = request.getParameter("phone");
+            String password = request.getParameter("password");
+            loginUser = userService.loginUser(phone,password);
+        }
+        JsonObject jsonObject = new JsonObject();
+        if(loginUser ==null){
+            return null;
+        }
+        Cart cart = userService.findCartByUserId(loginUser.getId());
         CartPojo cartPojo = new CartPojo();
         cartPojo.setCart(cart);
         if(cart!=null){
@@ -77,5 +88,24 @@ public class BuyController {
             cartPojo.setOrderProducts(orderProducts);
         }
         return cartPojo;
+    }
+
+    @RequestMapping(value="addCount",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String addCount(int id){
+        boolean flag = buyService.addCount(id);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("status",flag);
+        return jsonObject.toString();
+    }
+
+
+    @RequestMapping(value="subCount",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String subCount(int id){
+        boolean flag = buyService.subCount(id);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("status",flag);
+        return jsonObject.toString();
     }
 }

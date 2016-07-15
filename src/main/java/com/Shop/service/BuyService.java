@@ -130,4 +130,31 @@ public class BuyService {
         jsonObject.addProperty("status",true);
         return jsonObject.toString();
     }
+
+    public boolean addCount(int id){
+        OrderProduct orderProduct   = orderProductDao.findById(id,"OrderProduct");
+        Product product = productDao.findById(orderProduct.getProductId(),"Product");
+        if((orderProduct.getCount()+1) > product.getNum()){
+            return false;
+        }
+        orderProduct.setCount(orderProduct.getCount()+1);
+        Cart cart = cartDao.findById(orderProduct.getCartId(),"Cart");
+        cart.setCount(cart.getCount()+1);
+        cart.setPrices(orderProduct.getProductPrices()+cart.getPrices());
+        orderProductDao.updateAnyType(orderProduct);
+        return true;
+    }
+
+    public boolean subCount(int id){
+        OrderProduct orderProduct   = orderProductDao.findById(id,"OrderProduct");
+        if(orderProduct.getCount()<=1){
+            return false;
+        }
+        orderProduct.setCount(orderProduct.getCount()-1);
+        Cart cart = cartDao.findById(orderProduct.getCartId(),"Cart");
+        cart.setCount(cart.getCount()-1);
+        cart.setPrices(cart.getPrices()-orderProduct.getProductPrices());
+        orderProductDao.updateAnyType(orderProduct);
+        return true;
+    }
 }
