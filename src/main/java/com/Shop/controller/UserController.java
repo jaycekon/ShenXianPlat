@@ -6,11 +6,9 @@
 package com.Shop.controller;
 
 import com.Shop.Util.AddressPojo;
+import com.Shop.Util.OrderDetailPojo;
 import com.Shop.Util.OrdersPojo;
-import com.Shop.beans.Address;
-import com.Shop.beans.Citys;
-import com.Shop.beans.Orders;
-import com.Shop.beans.User;
+import com.Shop.beans.*;
 import com.Shop.service.AddressService;
 import com.Shop.service.OrderService;
 import com.Shop.service.UserService;
@@ -116,20 +114,28 @@ public class UserController {
         return u;
     }
 
+
     @RequestMapping(value = "/addAddress", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String addAddress(Address address, Citys citys, HttpSession session){
-//        User user = (User)session.getAttribute("loginUser");
-        User user = userService.loadUser(1);
+    public String addAddress(Address address, Citys citys, HttpSession session,HttpServletRequest request){
+        User loginUser=new User();
+        if(session.getAttribute("loginUser")!=null){
+            loginUser = (User)session.getAttribute("loginUser");
+        }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
+            String phone = request.getParameter("phone");
+            String password = request.getParameter("password");
+            loginUser = userService.loginUser(phone,password);
+        }
         JsonObject jsonObject = new JsonObject();
-        if(user ==null){
+        if(loginUser ==null){
             jsonObject.addProperty("status",false);
             jsonObject.addProperty("message","用户未登录");
             return jsonObject.toString();
         }
-        address.setUserId(user.getId());
-        if(citys!=null)
-        address.setArea(citys.getPro()+citys.getName());
+        address.setUserId(loginUser.getId());
+        if(citys!=null && citys.getPro()!=null) {
+            address.setArea(citys.getPro() + citys.getName());
+        }
         addressService.addAddress(address);
         jsonObject.addProperty("status",true);
         return jsonObject.toString();
@@ -154,40 +160,57 @@ public class UserController {
 
     @RequestMapping(value = "/listAddress", method = RequestMethod.POST)
     @ResponseBody
-    public AddressPojo listAddress(HttpSession session){
-        User user = (User)session.getAttribute("loginUser");
+    public AddressPojo listAddress(HttpSession session,HttpServletRequest request){
+        User loginUser=new User();
+        if(session.getAttribute("loginUser")!=null){
+            loginUser = (User)session.getAttribute("loginUser");
+        }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
+            String phone = request.getParameter("phone");
+            String password = request.getParameter("password");
+            loginUser = userService.loginUser(phone,password);
+        }
         AddressPojo addressPojo = new AddressPojo();
-        if(user ==null){
+        if(loginUser ==null){
            return null;
         }
-        List<Address> addresses = addressService.findAddressByUuserId(user.getId());
+        List<Address> addresses = addressService.findAddressByUuserId(loginUser.getId());
         addressPojo.setAddresses(addresses);
         return addressPojo;
     }
-    @RequestMapping(value = "/CreateOrder", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/CreateOrder", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String createOrder(HttpSession session,int addressId){
-//        User user =(User)session.getAttribute("loginUser");
-        User user = userService.loadUser(1);
+    public OrderDetailPojo createOrder(HttpSession session,int addressId,HttpServletRequest request){
+        User loginUser=new User();
+        if(session.getAttribute("loginUser")!=null){
+            loginUser = (User)session.getAttribute("loginUser");
+        }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
+            String phone = request.getParameter("phone");
+            String password = request.getParameter("password");
+            loginUser = userService.loginUser(phone,password);
+        }
+        String[] orderProductId = request.getParameterValues("orderProductId");
+        for(String str:orderProductId){
+            System.out.println(str);
+        }
         Address address = addressService.findAddressById(addressId);
-        orderService.addOrders(user.getId(),address);
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("status",true);
-        return jsonObject.toString();
+        OrderDetailPojo orderDetailPojo = orderService.addOrders(loginUser.getId(),address,orderProductId);
+        return orderDetailPojo;
     }
 
 
-    @RequestMapping(value = "/listOrders", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/listOrders", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public OrdersPojo listOrders(HttpSession session){
-        User user=(User)session.getAttribute("loginUser");
-        if(user==null){
-            return null;
+    public List<OrderDetailPojo> listOrders(HttpSession session,HttpServletRequest request){
+        User loginUser=new User();
+        if(session.getAttribute("loginUser")!=null){
+            loginUser = (User)session.getAttribute("loginUser");
+        }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
+            String phone = request.getParameter("phone");
+            String password = request.getParameter("password");
+            loginUser = userService.loginUser(phone,password);
         }
-        List<Orders> orderses = orderService.findOrdersByUserId(user.getId());
-        OrdersPojo ordersPojo = new OrdersPojo();
-        ordersPojo.setOrderses(orderses);
-        return ordersPojo;
+        List<OrderDetailPojo> orderses = orderService.findOrdersByUserId(loginUser.getId());
+        return orderses;
     }
 
 }

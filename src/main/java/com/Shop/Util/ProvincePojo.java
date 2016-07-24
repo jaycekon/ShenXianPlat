@@ -1,5 +1,6 @@
 package com.Shop.Util;
 
+import com.Shop.beans.Citys;
 import com.Shop.beans.Province;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
  */
 public class ProvincePojo {
     private List<Province> provinces;
+    private List<Citys> cityses;
 
 
     public List<Province> getProvinces() {
@@ -17,5 +19,13 @@ public class ProvincePojo {
 
     public void setProvinces(List<Province> provinces) {
         this.provinces = provinces;
+    }
+
+    public List<Citys> getCityses() {
+        return cityses;
+    }
+
+    public void setCityses(List<Citys> cityses) {
+        this.cityses = cityses;
     }
 }

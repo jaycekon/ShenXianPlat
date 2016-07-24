@@ -66,6 +66,7 @@ public class BuyService {
         orderProduct.setCount(orderProduct.getCount()+count);
         orderProduct.setProductDescripes(product.getName());
         orderProduct.setProductName(product.getName());
+        orderProduct.setImg(product.getImage());
         orderProduct.setProductPrices(product.getPrice());
         orderProduct.setProductId(productId);
         orderProduct.setCartId(cart.getId());
@@ -142,6 +143,7 @@ public class BuyService {
         cart.setCount(cart.getCount()+1);
         cart.setPrices(orderProduct.getProductPrices()+cart.getPrices());
         orderProductDao.updateAnyType(orderProduct);
+        cartDao.updateAnyType(cart);
         return true;
     }
 
@@ -155,6 +157,8 @@ public class BuyService {
         cart.setCount(cart.getCount()-1);
         cart.setPrices(cart.getPrices()-orderProduct.getProductPrices());
         orderProductDao.updateAnyType(orderProduct);
+        cartDao.updateAnyType(cart);
         return true;
     }
+
 }

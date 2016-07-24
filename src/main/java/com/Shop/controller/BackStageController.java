@@ -30,7 +30,10 @@ public class BackStageController {
     public ProvincePojo listProvince(){
         List<Province> provinces = backStageService.findProvince();
         ProvincePojo provincePojo = new ProvincePojo();
+        System.out.println(provinces.get(0).getName());
+        List<Citys> cityses = backStageService.findCitys(provinces.get(0).getName());
         provincePojo.setProvinces(provinces);
+        provincePojo.setCityses(cityses);
         return provincePojo;
     }
 
