@@ -37,7 +37,7 @@ public class OrderService {
         List<OrderProduct> os = new ArrayList<>();
         orders.setSetDate(new Date());
         orders.setUserAddress(address.getDetails());
-        orders.setUserPhone(address.getPhone());
+        orders.setUserPhone(address.getUserphone());
         orders.setUserName(address.getUsername());
         ordersDao.addAnyType(orders);
         List<OrderProduct> orderProducts = orderProductDao.findByCartId(cart.getId());

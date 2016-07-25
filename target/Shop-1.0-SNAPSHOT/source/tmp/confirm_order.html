@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="source/css/confirm_order.css" />
+</head>
+<body>
+<header>
+    <a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
+    <h1>确认订单</h1>
+</header>
+<div style="height:1rem;"></div>
+<aside class="confirmAddr">
+    <p>
+        <span>收货人：DeathGhost</span>
+        <span>1830927**73</span>
+    </p>
+    <address>陕西省西安市雁塔区某某大厦</address>
+    <a href="#/address" class="iconfont">&#60;</a>
+</aside>
+<dl class="payment">
+    <dt>选择支付方式</dt>
+    <dd>
+        <label><input type="radio" name="pay"/>支付宝支付</label>
+        <label><input type="radio" name="pay"/>微信支付</label>
+    </dd>
+</dl>
+<div style="height:1rem;"></div>
+<aside class="btmNav">
+    <a style="background:#64ab5b;color:white;text-shadow:none;">合计：￥0.00</a>
+    <a style="background:#6bc75f;color:white;text-shadow:none;">提交订单</a>
+</aside>
+<script src="../js/lib/jquery.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".payment dd label input[type='radio']").click(function(){
+            $(this).parent().addClass("isTrue");
+            $(this).parent().siblings().removeClass("isTrue");
+        });
+        $(".btmNav a:last").click(function(){
+            alert("点击提交订单后跳转支付接口，再返回支付状态！");
+            location.href="return_state.html";
+        });
+    });
+</script>
+</body>
+</html>

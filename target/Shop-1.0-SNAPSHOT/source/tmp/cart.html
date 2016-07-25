@@ -1,0 +1,37 @@
+<link rel="stylesheet" type="text/css" href="source/css/cart.css" />
+<header>
+    <a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
+    <h1>购物车</h1>
+</header>
+<div style="height:1rem;"></div>
+<div ng-controller="CartController">
+<dl class="cart" >
+    <dt>
+        <a class="edit" ng-click="toggle($event)">编辑</a>
+    </dt>
+    <dd ng-repeat = 'item in items'>
+        <a href="product.html" class="goodsPic"><img ng-src="{{item.imgsrc}}"/></a>
+        <div class="goodsInfor">
+            <h2>
+                <a href="product.html">{{item.name}}</a>
+                <span>{{item.num}}</span>
+            </h2>
+            <div class="priceArea">
+                <strong>{{item.price}}</strong>
+                <del>{{item.origPrice}}</del>
+            </div>
+            <div class="numberWidget"  ng-show="editShow">
+                <input type="button" value="-" class="minus" ng-click="SubNum($index)"/>
+                <input type="number" ng-model="item.num"  class="numberChange"/>
+                <input type="button" value="+"  class="plus" ng-click="AddNum($index)"/>
+            </div>
+        </div>
+        <a class="delBtn" ng-show="editShow" ng-click="remove($index)"><p class="fa fa-minus" aria-hidden="true"></p><p>删除</p></a>
+    </dd>
+</dl>
+<div style="height:1rem;"></div>
+<aside class="btmNav">
+    <a>合计：￥{{totalPrice()}}</a>
+    <a href="#/confirm_order" style="background:#64ab5b;color:white;text-shadow:none;">立即下单</a>
+</aside>
+</div>

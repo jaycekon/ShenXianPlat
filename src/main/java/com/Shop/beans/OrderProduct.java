@@ -1,0 +1,97 @@
+package com.Shop.beans;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * Created by Administrator on 2016/6/28.
+ */
+@Entity
+@Table
+public class OrderProduct {
+    private int id;
+    private int count;
+    private float productPrices;
+    private String productName;
+    private String productDescripes;        //
+    private int cartId;
+    private int ProductId;
+    private int OrderId;
+    private String img;
+
+    @Id
+    @GeneratedValue
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public float getProductPrices() {
+        return productPrices;
+    }
+
+    public void setProductPrices(float productPrices) {
+        this.productPrices = productPrices;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductDescripes() {
+        return productDescripes;
+    }
+
+    public void setProductDescripes(String productDescripes) {
+        this.productDescripes = productDescripes;
+    }
+
+    public int getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
+    }
+
+    public int getProductId() {
+        return ProductId;
+    }
+
+    public void setProductId(int productId) {
+        ProductId = productId;
+    }
+
+    public int getOrderId() {
+        return OrderId;
+    }
+
+    public void setOrderId(int orderId) {
+        OrderId = orderId;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+}

@@ -1,0 +1,142 @@
+<link rel="stylesheet" type="text/css" href="source/css/index.css" />
+
+<div id="slide">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+     <a href="#">
+      <img src="source/img/index/slide001.jpg"/>
+     </a>
+    </div>
+    <div class="swiper-slide">
+     <a href="#">
+      <img src="source/img/index/slide002.jpg"/>
+     </a>
+    </div>
+  </div>
+  <div class="pagination"></div>  
+</div>
+<ul class="categoryLiIcon">
+ <li>
+  <a href="#">
+   <img src="source/img/index/menu_bg_01.png"/>
+   <em>蔬菜水果</em>
+  </a>
+ </li>
+ <li>
+  <a href="#">
+   <img src="source/img/index/menu_bg_06.png"/>
+   <em>禽蛋肉类</em>
+  </a>
+ </li>
+ <li>
+  <a href="#">
+   <img src="source/img/index/menu_bg_10.png"/>
+   <em>水产火锅</em>
+  </a>
+ </li>
+ <li>
+  <a href="#">
+   <img src="source/img/index/menu_bg_14.png"/>
+   <em>熟食豆制</em>
+  </a>
+ </li>
+ <li>
+  <a href="#">
+   <img src="source/img/index/menu_bg_03.png"/>
+   <em>米面粮油</em>
+  </a>
+ </li>
+ <li>
+  <a href="#">
+   <img src="source/img/index/menu_bg_07.png"/>
+   <em>调料干货</em>
+  </a>
+ </li>
+ <li>
+  <a href="#">
+   <img src="source/img/index/menu_bg_11.png"/>
+   <em>餐厨用品</em>
+  </a>
+ </li>
+ <li>
+  <a href="#">
+   <img src="source/img/index/menu_bg_15.png"/>
+   <em>常购品</em>
+  </a>
+ </li>
+</ul>
+<dl class="tab_proList"  ng-controller="IndexController">
+ <dt>
+  <a ng-click="toggleList($event)">热销</a>
+  <a ng-click="toggleList($event)">新品</a>
+  <a ng-click="toggleList($event)">打折</a>
+ </dt>
+ <dd ng-repeat="item in hot" ng-show="hotShow">
+  <ul>
+   <li>
+    <a href="#" class="goodsPic">
+     <img ng-src="{{item.imgsrc}}"/>
+    </a>
+    <div class="goodsInfor">
+     <h2>
+      <a href="#">{{item.title}}</a>
+     </h2>
+     <p>
+      <del>{{item.origPrice}}</del>
+     </p>
+     <p>
+      <strong class="price">{{item.price}}</strong>
+     </p>
+     <a class="addToCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+    </div>
+   </li>
+ </dd>
+ <dd ng-repeat="item in new"  ng-show="newShow">
+  <ul>
+   <li>
+    <a href="#" class="goodsPic">
+     <img ng-src="{{item.imgsrc}}"/>
+    </a>
+    <div class="goodsInfor">
+     <h2>
+      <a href="#">{{item.title}}</a>
+     </h2>
+     <p>
+      <del>{{item.origPrice}}</del>
+     </p>
+     <p>
+      <strong class="price">{{item.price}}</strong>
+     </p>
+     <a class="addToCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+    </div>
+   </li>
+ </dd>
+ <dd ng-repeat="item in sale"  ng-show="saleShow">
+  <ul>
+   <li>
+    <a href="#" class="goodsPic">
+     <img ng-src="{{item.imgsrc}}"/>
+    </a>
+    <div class="goodsInfor">
+     <h2>
+      <a href="#">{{item.title}}</a>
+     </h2>
+     <p>
+      <del>{{item.origPrice}}</del>
+     </p>
+     <p>
+      <strong class="price">{{item.price}}</strong>
+     </p>
+     <a class="addToCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+    </div>
+   </li>
+ </dd>
+</dl>
+<div class="hoverCart">
+ <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+ <a href="#">0</a>
+</div>
+<div style="height:1.2rem;"></div>
+
+<script src="source/js/controllers/index.js"></script>
+

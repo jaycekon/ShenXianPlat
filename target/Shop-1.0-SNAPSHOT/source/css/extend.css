@@ -1,0 +1,34 @@
+header{height:1rem;line-height:1rem;    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #21d9a2), color-stop(1, #31bd80));position:relative;}
+header h1{
+    margin:0;text-align:center;width:50%;margin:0 auto;height:1rem;line-height:1rem;color:white;
+    position: relative;
+    bottom: 50px;
+}
+header .logoIcon{font-family:'freshregular';font-size:.8rem;}
+header .location{display:block;position:absolute;left:0;top:0;color:white;padding:0 .25rem;}
+header .location:after{font-family:'freshregular';content:"_";margin-left:.05rem;font-size:.25rem;}
+header .rt_searchIcon{font-family:'freshregular';display:block;position:absolute;right:0;top:0;padding:0 .3rem;color:white;font-size:.5rem;}
+header a{
+    color: white;
+    padding: 0 15px;
+}
+header .cart{
+    position: relative;
+    top: -100px;
+    left: 320px;
+    font-size: 0.4rem;
+}
+nav{position:fixed;bottom:0;width:100%;height:1rem;line-height:1rem;background:#f8f8f8;border-top:1px #f4f4f4 solid;display:box;display:-webkit-box;display:-moz-box;}
+nav a{display:block;-webkit-box-flex:1;-moz-box-flex:1;text-align:center;color:grey;line-height:1.2;    padding: 10px 0;}
+nav a:before{display:block;font-family:'freshregular';font-size:.5rem;}
+nav .homeIcon:before{content:"H";}
+nav .categoryIcon:before{content:"C";}
+nav .cartIcon:before{content:"G";}
+nav .userIcon:before{content:"U";}
+nav p{
+    color: #29cb91;
+    text-align: center;
+}
+nav .icon{
+    font-size: 0.4rem;
+}
