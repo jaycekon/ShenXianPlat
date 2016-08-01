@@ -9,12 +9,12 @@ public class FinalizeEscapeGc {
         System.out.println("yes, i am still alive");
     }
 
-    @Override
-    protected  void finalize() throws Throwable{
-        super.finalize();
-        System.out.println("finalize method executed!");
-        FinalizeEscapeGc.SAVE_HOOK = this;
-    }
+//    @Override
+//    protected  void finalize() throws Throwable{
+//        super.finalize();
+//        System.out.println("finalize method executed!");
+//        FinalizeEscapeGc.SAVE_HOOK = this;
+//    }
 
     public static void main(String[] args) throws InterruptedException {
         SAVE_HOOK = new FinalizeEscapeGc();

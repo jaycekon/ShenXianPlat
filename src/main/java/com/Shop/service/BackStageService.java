@@ -93,4 +93,9 @@ public class BackStageService {
         Cate cate = cateDao.findByCateName(name);
         return cate;
     }
+
+    public Cate findCateById(int id){
+        Cate cate = cateDao.findById(id,"Cate");
+        return cate;
+    }
 }

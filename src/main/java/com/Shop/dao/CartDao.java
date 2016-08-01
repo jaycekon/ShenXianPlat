@@ -17,7 +17,6 @@ public class CartDao extends IBaseDao<Cart> {
         Session session = super.openSession();
         String hql="from Cart where userId=:id";
         Cart cart = (Cart)session.createQuery(hql).setParameter("id",id).uniqueResult();
-        session.close();
         return cart;
     }
 }

@@ -23,6 +23,12 @@
     <mvc:resources mapping="/source/**" location="/App/source/"/>
     <mvc:resources mapping="/App/source/**" location="/App/,/App/source/"/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"></mvc:mapping>
+            <bean class="com.Shop.Interceptor.RequestInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/App/source/"/>
         <property name="suffix" value=".html"/>

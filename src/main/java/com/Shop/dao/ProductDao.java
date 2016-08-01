@@ -17,5 +17,12 @@ public class ProductDao extends IBaseDao<Product> {
             return products;
         }
 
+        public List<Product> findProductByCate(String cate){
+            Session session = super.openSession();
+            String hql = "from Product where cate like:cate";
+            List<Product> products = session.createQuery(hql).setParameter("cate","%"+cate+"%").list();
+            return products;
+        }
+
 
 }

@@ -5,6 +5,7 @@
  */
 package com.Shop.controller;
 
+import com.Shop.DTO.UserDTO;
 import com.Shop.Util.AddressPojo;
 import com.Shop.Util.OrderDetailPojo;
 import com.Shop.Util.OrdersPojo;
@@ -24,12 +25,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -105,12 +101,14 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public User loginUser(Model model, User user,HttpSession session) {
-        User u = userService.loginUser(user.getPhone(), user.getPassword());
-        if (u != null) {
-//            model.addAttribute("loginUser", u);
-             session.setAttribute("loginUser", u);
-        }
+    public Object loginUser(@RequestParam String phone,@RequestParam String password,Model model,User user, HttpSession session, HttpServletRequest request) {
+//        String phone = request.getParameter("phone");
+//        String password = request.getParameter("password");
+        System.out.println(phone+","+password);
+        System.out.println(request.getParameter("phone")+","+request.getParameter("password"));
+        System.out.println(user.getPhone()+","+user.getPassword());
+        UserDTO u = userService.loginUser(phone, password);
+        session.setAttribute("loginUser",u.getUser());
         return u;
     }
 
@@ -124,7 +122,7 @@ public class UserController {
         }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
             String phone = request.getParameter("phone");
             String password = request.getParameter("password");
-            loginUser = userService.loginUser(phone,password);
+            loginUser = userService.loginUser(phone,password).getUser();
         }
         JsonObject jsonObject = new JsonObject();
         if(loginUser ==null){
@@ -167,7 +165,7 @@ public class UserController {
         }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
             String phone = request.getParameter("phone");
             String password = request.getParameter("password");
-            loginUser = userService.loginUser(phone,password);
+            loginUser = userService.loginUser(phone,password).getUser();
         }
         AddressPojo addressPojo = new AddressPojo();
         if(loginUser ==null){
@@ -186,7 +184,7 @@ public class UserController {
         }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
             String phone = request.getParameter("phone");
             String password = request.getParameter("password");
-            loginUser = userService.loginUser(phone,password);
+            loginUser = userService.loginUser(phone,password).getUser();
         }
         String[] orderProductId = request.getParameterValues("orderProductId");
         for(String str:orderProductId){
@@ -207,7 +205,7 @@ public class UserController {
         }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
             String phone = request.getParameter("phone");
             String password = request.getParameter("password");
-            loginUser = userService.loginUser(phone,password);
+            loginUser = userService.loginUser(phone,password).getUser();
         }
         List<OrderDetailPojo> orderses = orderService.findOrdersByUserId(loginUser.getId());
         return orderses;

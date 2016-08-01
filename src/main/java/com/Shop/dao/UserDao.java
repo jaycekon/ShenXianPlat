@@ -33,13 +33,10 @@ public class UserDao extends IBaseDao<User> {
         return user;
     }
     
-    public User loginUser(String phone,String password){
+    public User loginUser(String phone){
         String sql="from User where phone=:phone";
         User user = (User)this.openSession().createQuery(sql).setParameter("phone",phone).uniqueResult();
-        if(user!=null){
-            if(user.getPassword().equals(password)||password==user.getPassword())return user;
-        }
-        return null; 
+        return user;
     }
     
 

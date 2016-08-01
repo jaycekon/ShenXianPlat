@@ -1,6 +1,8 @@
 package com.Shop.controller;
 
+import com.Shop.DTO.DetailDto;
 import com.Shop.Util.ProductPojo;
+import com.Shop.beans.Image;
 import com.Shop.beans.Product;
 import com.Shop.service.GoodService;
 import com.google.gson.Gson;
@@ -10,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/6/30.
@@ -31,11 +36,13 @@ public class GoodController {
 
     @RequestMapping(value="/Detail",method = RequestMethod.GET)
     @ResponseBody
-    public ProductPojo productDetail(int id){
+    public DetailDto productDetail(int id){
         Product product = goodService.findProductById(id);
-        ProductPojo productPojo = new ProductPojo();
-        productPojo.setDetail(product);
-        return productPojo;
+        List<String> list = goodService.findImageByProductId(product.getId());
+        DetailDto detailDto = new DetailDto();
+        detailDto.setProduct(product);
+        detailDto.setImageUrl(list);
+        return detailDto;
     }
 
 

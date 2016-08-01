@@ -14,7 +14,6 @@ public class CitysDao extends IBaseDao<Citys> {
         Session session = super.openSession();
         String hql="from Citys where pro=:pro";
         List<Citys> cityses = session.createQuery(hql).setParameter("pro",pro).list();
-        session.close();
         return cityses;
     }
 

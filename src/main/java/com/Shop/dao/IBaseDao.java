@@ -20,15 +20,12 @@ public class IBaseDao<T> extends BaseDao {
         Session session =super.openSession();
         session.delete(t);
         session.beginTransaction().commit();
-        session.close();
     }
 
     public void updateAnyType(T t){
         Session session =super.openSession();
         System.out.println("更新");
         session.update(t);
-        session.beginTransaction().commit();
-        session.close();
     }
 
     public List findAll(String type){

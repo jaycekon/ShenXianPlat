@@ -22,7 +22,6 @@ public class OrderProductDao extends IBaseDao<OrderProduct> {
         String hql="from OrderProduct where cartId=:cartId and productId=:productId";
         OrderProduct orderProduct = (OrderProduct)session.createQuery(hql)
                 .setParameter("cartId",cartId).setParameter("productId",productId).uniqueResult();
-        session.close();
         return orderProduct;
     }
 
@@ -30,7 +29,6 @@ public class OrderProductDao extends IBaseDao<OrderProduct> {
         Session session =super.openSession();
         String hql="from OrderProduct where cartId=:cartId";
         List<OrderProduct> orderProducts = session.createQuery(hql).setParameter("cartId",cartId).list();
-        session.close();
         return orderProducts;
     }
 
@@ -38,7 +36,6 @@ public class OrderProductDao extends IBaseDao<OrderProduct> {
         Session session =super.openSession();
         String hql="from OrderProduct where orderId=:orderId";
         List<OrderProduct> orderProducts = session.createQuery(hql).setParameter("orderId",orderId).list();
-        session.close();
         return orderProducts;
     }
 

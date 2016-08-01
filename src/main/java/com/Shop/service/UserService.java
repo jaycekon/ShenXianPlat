@@ -5,6 +5,7 @@
  */
 package com.Shop.service;
 
+import com.Shop.DTO.UserDTO;
 import com.Shop.beans.Cart;
 import com.Shop.beans.User;
 import com.Shop.dao.CartDao;
@@ -35,13 +36,19 @@ public class UserService {
      * @return 登陆成功后用户的实例
      */
     
-    public User loginUser(String phone,String password){
-        User user=userDao.loginUser(phone, password);
+    public UserDTO loginUser(String phone,String password){
+        User user=userDao.loginUser(phone);
+        UserDTO userDTO = new UserDTO();
         if(user==null){
-            System.out.println("用户密码不正确");
-            return null;
+            userDTO.setState(0);
+            userDTO.setErrorMsg("账号错误，找不到用户");
+        }else if(!user.getPassword().equals(password)){
+            userDTO.setState(1);
+            userDTO.setErrorMsg("密码错误");
+        }else{
+            userDTO.setUser(user);
         }
-        return user;
+        return userDTO;
     }
     
     public User loadUser(int id){

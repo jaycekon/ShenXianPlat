@@ -13,7 +13,6 @@ public class AddressDao extends IBaseDao<Address> {
         Session session  = super.openSession();
         String hql= "from Address where userId=:userId";
         List<Address> addresses = session.createQuery(hql).setParameter("userId",userId).list();
-        session.close();
         return addresses;
     }
 }

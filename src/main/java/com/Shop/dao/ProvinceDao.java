@@ -12,7 +12,6 @@ public class ProvinceDao extends  IBaseDao<Province>{
         Session session = super.openSession();
         String hql="from Province where name=:name";
         Province province = (Province) session.createQuery(hql).setParameter("name",name).uniqueResult();
-        session.close();
         return province;
     }
 }

@@ -37,7 +37,7 @@ public class BuyController {
         }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
                 String phone = request.getParameter("phone");
                 String password = request.getParameter("password");
-                loginUser = userService.loginUser(phone,password);
+                loginUser = userService.loginUser(phone,password).getUser();
         }
         JsonObject jsonObject = new JsonObject();
         if(loginUser ==null){
@@ -74,7 +74,7 @@ public class BuyController {
         }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
             String phone = request.getParameter("phone");
             String password = request.getParameter("password");
-            loginUser = userService.loginUser(phone,password);
+            loginUser = userService.loginUser(phone,password).getUser();
         }
         JsonObject jsonObject = new JsonObject();
         if(loginUser ==null){

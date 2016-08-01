@@ -21,7 +21,7 @@ public class BaseDao {
     }
 
     protected  Session openSession() {
-        return getSessionFactory().openSession();
+        return getSessionFactory().getCurrentSession();
     }
 
 
