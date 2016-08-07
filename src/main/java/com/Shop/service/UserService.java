@@ -10,6 +10,7 @@ import com.Shop.beans.Cart;
 import com.Shop.beans.User;
 import com.Shop.dao.CartDao;
 import com.Shop.dao.UserDao;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 public class UserService {
     @Autowired
@@ -25,8 +26,18 @@ public class UserService {
      * 下面开始写UserService的代码
      *
      *************************************************************************/
-    public void addUser(User user){
+    public JsonObject addUser(User user){
+       User u = userDao.loadUserByPhone(user.getPhone());
+        JsonObject jsonObject= new JsonObject();
+        if(u!=null){
+            jsonObject.addProperty("status",1);
+            jsonObject.addProperty("hint","用户已存在");
+            return jsonObject;
+        }
        userDao.addAnyType(user);
+        jsonObject.addProperty("status",0);
+        jsonObject.addProperty("hint","成功添加用户");
+        return jsonObject;
     }
     
     /**

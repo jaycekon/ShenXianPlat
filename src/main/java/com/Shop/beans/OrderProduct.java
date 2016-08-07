@@ -13,6 +13,8 @@ import javax.persistence.Table;
 public class OrderProduct {
     private int id;
     private int count;
+    private int status;
+    private int comment;
     private float productPrices;
     private String productName;
     private String productDescripes;        //
@@ -93,5 +95,21 @@ public class OrderProduct {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getComment() {
+        return comment;
+    }
+
+    public void setComment(int comment) {
+        this.comment = comment;
     }
 }

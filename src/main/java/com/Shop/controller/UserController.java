@@ -40,28 +40,26 @@ public class UserController {
     private OrderService orderService;
     Logger log = Logger.getLogger(this.getClass());
 
-    /**
-     * 添加用户
-     *
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String addUser(Model model) {
-        return "register";
-    }
+//    /**
+//     * 添加用户
+//     *
+//     * @param model
+//     * @return
+//     */
+//    @RequestMapping(value = "/register", method = RequestMethod.GET)
+//    public String addUser(Model model) {
+//        return "register";
+//    }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/register", method = {RequestMethod.POST,RequestMethod.GET},produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String addUser(User user) {
-        JsonObject object = new JsonObject();
-        object.addProperty("status",1);
-        System.out.println(object.toString());
+       JsonObject jsonObject = new JsonObject();
+        System.out.println(user.getSex()+","+user.getNickname());
         if(user!=null){
-            userService.addUser(user);
-            object.addProperty("hint","添加用户成功");
+            jsonObject = userService.addUser(user);
         }
-        return object.toString();
+        return jsonObject.toString();
     }
 
 
@@ -88,42 +86,30 @@ public class UserController {
     }
 
 
-    /**
-     * 登录用户
-     *
-     */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginUser(Model model) {
-        return "login";
-    }
-    
-    
+//    /**
+//     * 登录用户
+//     *
+//     */
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String loginUser(Model model) {
+//        return "login";
+//    }
+//
+//
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
-    public Object loginUser(@RequestParam String phone,@RequestParam String password,Model model,User user, HttpSession session, HttpServletRequest request) {
-//        String phone = request.getParameter("phone");
-//        String password = request.getParameter("password");
-        System.out.println(phone+","+password);
-        System.out.println(request.getParameter("phone")+","+request.getParameter("password"));
-        System.out.println(user.getPhone()+","+user.getPassword());
-        UserDTO u = userService.loginUser(phone, password);
+    public Object loginUser(User user, HttpSession session) {
+        UserDTO u = userService.loginUser(user.getPhone(),user.getPassword());
         session.setAttribute("loginUser",u.getUser());
         return u;
     }
 
 
-    @RequestMapping(value = "/addAddress", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/addAddress", method = {RequestMethod.POST,RequestMethod.GET},produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String addAddress(Address address, Citys citys, HttpSession session,HttpServletRequest request){
-        User loginUser=new User();
-        if(session.getAttribute("loginUser")!=null){
-            loginUser = (User)session.getAttribute("loginUser");
-        }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
-            String phone = request.getParameter("phone");
-            String password = request.getParameter("password");
-            loginUser = userService.loginUser(phone,password).getUser();
-        }
+    public String addAddress(Address address,HttpSession session,HttpServletRequest request){
+        User loginUser = (User)session.getAttribute("loginUser");
         JsonObject jsonObject = new JsonObject();
         if(loginUser ==null){
             jsonObject.addProperty("status",false);
@@ -131,9 +117,6 @@ public class UserController {
             return jsonObject.toString();
         }
         address.setUserId(loginUser.getId());
-        if(citys!=null && citys.getPro()!=null) {
-            address.setArea(citys.getPro() + citys.getName());
-        }
         addressService.addAddress(address);
         jsonObject.addProperty("status",true);
         return jsonObject.toString();
@@ -158,14 +141,13 @@ public class UserController {
 
     @RequestMapping(value = "/listAddress", method = RequestMethod.POST)
     @ResponseBody
-    public AddressPojo listAddress(HttpSession session,HttpServletRequest request){
-        User loginUser=new User();
-        if(session.getAttribute("loginUser")!=null){
-            loginUser = (User)session.getAttribute("loginUser");
-        }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
-            String phone = request.getParameter("phone");
-            String password = request.getParameter("password");
-            loginUser = userService.loginUser(phone,password).getUser();
+    public Object listAddress(HttpSession session,HttpServletRequest request){
+        User loginUser = (User)session.getAttribute("loginUser");
+        JsonObject jsonObject = new JsonObject();
+        if(loginUser ==null){
+            jsonObject.addProperty("status",false);
+            jsonObject.addProperty("message","用户未登录");
+            return jsonObject.toString();
         }
         AddressPojo addressPojo = new AddressPojo();
         if(loginUser ==null){
@@ -177,16 +159,17 @@ public class UserController {
     }
     @RequestMapping(value = "/CreateOrder", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public OrderDetailPojo createOrder(HttpSession session,int addressId,HttpServletRequest request){
-        User loginUser=new User();
-        if(session.getAttribute("loginUser")!=null){
-            loginUser = (User)session.getAttribute("loginUser");
-        }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
-            String phone = request.getParameter("phone");
-            String password = request.getParameter("password");
-            loginUser = userService.loginUser(phone,password).getUser();
+    public Object createOrder(HttpSession session,int addressId,HttpServletRequest request){
+//        User loginUser = (User)session.getAttribute("loginUser");
+        User loginUser = userService.loadUser(1);
+        JsonObject jsonObject = new JsonObject();
+        if(loginUser ==null){
+            jsonObject.addProperty("status",false);
+            jsonObject.addProperty("message","用户未登录");
+            return jsonObject.toString();
         }
-        String[] orderProductId = request.getParameterValues("orderProductId");
+        String strs = request.getParameter("OrderProductId");
+        String[] orderProductId = strs.split(",");
         for(String str:orderProductId){
             System.out.println(str);
         }
@@ -198,7 +181,7 @@ public class UserController {
 
     @RequestMapping(value = "/listOrders", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public List<OrderDetailPojo> listOrders(HttpSession session,HttpServletRequest request){
+    public Object listOrders(HttpSession session,HttpServletRequest request){
         User loginUser=new User();
         if(session.getAttribute("loginUser")!=null){
             loginUser = (User)session.getAttribute("loginUser");
@@ -208,7 +191,26 @@ public class UserController {
             loginUser = userService.loginUser(phone,password).getUser();
         }
         List<OrderDetailPojo> orderses = orderService.findOrdersByUserId(loginUser.getId());
-        return orderses;
+        OrdersPojo ordersPojo = new OrdersPojo();
+        ordersPojo.setOrderses(orderses);
+        return ordersPojo;
     }
+
+
+    @RequestMapping(value="OrderDetail",method =RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Object orderDetail(int id,HttpSession session,String phone,String password){
+//        User user = (User)session.getAttribute("loginUser");
+//        if(user==null){
+//            JsonObject jsonObject = new JsonObject();
+//            jsonObject.addProperty("status",1);
+//            jsonObject.addProperty("errorMsg","用户未登陆");
+//            return jsonObject.toString();
+//        }
+
+        OrderDetailPojo orderDetailPojo = orderService.findOrderDetail(id,1);
+        return orderDetailPojo;
+    }
+
 
 }

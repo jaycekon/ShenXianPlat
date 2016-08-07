@@ -1,5 +1,6 @@
 package com.Shop.DTO;
 
+import com.Shop.beans.Comment;
 import com.Shop.beans.Product;
 
 import java.util.List;
@@ -9,7 +10,8 @@ import java.util.List;
  */
 public class DetailDto {
     private Product detail;
-    private List<String> imageUrl;
+    private List<ImageDto> imageUrl;
+    private List<CommentDto> comments;
 
     public Product getProduct() {
         return detail;
@@ -19,11 +21,19 @@ public class DetailDto {
         this.detail = detail;
     }
 
-    public List<String> getImageUrl() {
+    public List<ImageDto> getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(List<String> imageUrl) {
+    public void setImageUrl(List<ImageDto> imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public List<CommentDto> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDto> comments) {
+        this.comments = comments;
     }
 }

@@ -75,6 +75,7 @@ public class UserAgentUtil {
         boolean mobileFlag = false;
         String via = request.getHeader("Via");
         String userAgent = request.getHeader("user-agent");
+        System.out.println(userAgent);
         for (int i = 0; via != null && !via.trim().equals("") && i < mobileGateWayHeaders.length; i++) {
             if (via.contains(mobileGateWayHeaders[i])) {
                 mobileFlag = true;

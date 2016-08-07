@@ -30,7 +30,6 @@ public class BuyService {
         JsonObject jsonObject = new JsonObject();
         int flag=0;
         Cart cart = cartDao.findByUserId(user.getId());
-        User u = userDao.findById(user.getId(),"User");
         if(cart == null){
             flag=1;
             cart = new Cart();

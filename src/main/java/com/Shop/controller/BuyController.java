@@ -1,10 +1,10 @@
 package com.Shop.controller;
 
 import com.Shop.Util.CartPojo;
-import com.Shop.beans.Cart;
-import com.Shop.beans.OrderProduct;
-import com.Shop.beans.User;
+import com.Shop.beans.*;
 import com.Shop.service.BuyService;
+import com.Shop.service.CommentService;
+import com.Shop.service.OrderService;
 import com.Shop.service.UserService;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +27,15 @@ public class BuyController {
     private BuyService buyService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(value="buyGood",method= RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String buyGood(int id, int count, HttpSession session,HttpServletRequest request){
-        User loginUser=new User();
-        if(session.getAttribute("loginUser")!=null){
-            loginUser = (User)session.getAttribute("loginUser");
-        }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
-                String phone = request.getParameter("phone");
-                String password = request.getParameter("password");
-                loginUser = userService.loginUser(phone,password).getUser();
-        }
+        User loginUser = (User)session.getAttribute("loginUser");
         JsonObject jsonObject = new JsonObject();
         if(loginUser ==null){
             jsonObject.addProperty("status",false);
@@ -65,20 +62,15 @@ public class BuyController {
         return json;
     }
 
-    @RequestMapping(value="myCart",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @RequestMapping(value="myCart",method = {RequestMethod.GET,RequestMethod.POST},produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public CartPojo myCart(HttpSession session,HttpServletRequest request){
-        User loginUser=new User();
-        if(session.getAttribute("loginUser")!=null){
-            loginUser = (User)session.getAttribute("loginUser");
-        }else if(request.getParameter("phone")!=null&&request.getParameter("password")!=null){
-            String phone = request.getParameter("phone");
-            String password = request.getParameter("password");
-            loginUser = userService.loginUser(phone,password).getUser();
-        }
+    public Object myCart(HttpSession session,HttpServletRequest request){
+        User loginUser= (User)session.getAttribute("loginUser");
         JsonObject jsonObject = new JsonObject();
         if(loginUser ==null){
-            return null;
+            jsonObject.addProperty("status",1);
+            jsonObject.addProperty("errorMsg","用户未登录");
+            return jsonObject.toString();
         }
         Cart cart = userService.findCartByUserId(loginUser.getId());
         CartPojo cartPojo = new CartPojo();
@@ -106,6 +98,37 @@ public class BuyController {
         boolean flag = buyService.subCount(id);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("status",flag);
+        return jsonObject.toString();
+    }
+
+    @RequestMapping(value="Comment",method={RequestMethod.GET,RequestMethod.POST},produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Object addComment(int orderId,int orderProductId,Comment comment,HttpSession session){
+        User user = (User)session.getAttribute("loginUser");
+        JsonObject jsonObject = new JsonObject();
+        if(user==null){
+            jsonObject.addProperty("status",1);
+            jsonObject.addProperty("errorMsg","用户未登录");
+            return jsonObject.toString();
+        }
+        Orders orders = orderService.findOrder(orderId);
+        if(orders.getStatus()!=3){
+            jsonObject.addProperty("status",1);
+            jsonObject.addProperty("errorMsg","订单未完成，无法评论");
+            return jsonObject.toString();
+        }
+        OrderProduct orderProduct = orderService.findOrderProduct(orderProductId);
+        if(orderProduct.getComment()==1){
+            jsonObject.addProperty("status",1);
+            jsonObject.addProperty("errorMsg","该商品已评论");
+            return jsonObject.toString();
+        }
+        orderProduct.setComment(1);
+        orderService.updateOrderProduct(orderProduct);
+        comment.setGoodId(orderProduct.getProductId());
+        comment.setOrderProductId(orderProduct.getId());
+        commentService.addComment(comment,user);
+        jsonObject.addProperty("status",0);
         return jsonObject.toString();
     }
 }

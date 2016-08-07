@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class OrderDetailPojo {
     private Orders orders;
-    private List<OrderProduct> orderProducts;
+    private List<OrderProductPojo> orderProducts;
 
     public Orders getOrders() {
         return orders;
@@ -20,11 +20,11 @@ public class OrderDetailPojo {
         this.orders = orders;
     }
 
-    public List<OrderProduct> getOrderProducts() {
+    public List<OrderProductPojo> getOrderProducts() {
         return orderProducts;
     }
 
-    public void setOrderProducts(List<OrderProduct> orderProducts) {
+    public void setOrderProducts(List<OrderProductPojo> orderProducts) {
         this.orderProducts = orderProducts;
     }
 }

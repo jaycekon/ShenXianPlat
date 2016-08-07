@@ -78,6 +78,7 @@
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="remove*" propagation="REQUIRED"/>
             <tx:method name="sub*" propagation="REQUIRED"/>
+            <tx:method name="buy*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
     
@@ -104,9 +105,8 @@
     <bean id="productDao" class="com.Shop.dao.ProductDao" parent="daoTemplate"/>
     <bean id="orderDao" class="com.Shop.dao.OrdersDao" parent="daoTemplate"/>
     <bean id="orderProductDao" class="com.Shop.dao.OrderProductDao" parent="daoTemplate"/>
-    <bean id="provinceDao" class="com.Shop.dao.ProvinceDao" parent="daoTemplate"/>
-    <bean id="citysDao" class="com.Shop.dao.CitysDao" parent="daoTemplate"/>
     <bean id="imageDao" class="com.Shop.dao.ImageDao" parent="daoTemplate"/>
+    <bean id="commentDao" class="com.Shop.dao.CommentDao" parent="daoTemplate"/>
 
     
     
@@ -116,6 +116,7 @@
     <bean id="backStageService" class="com.Shop.service.BackStageService"></bean>
     <bean id="addressService" class="com.Shop.service.AddressService"></bean>
     <bean id="orderService" class="com.Shop.service.OrderService"></bean>
+    <bean id="commentService" class="com.Shop.service.CommentService"></bean>
 
 
 

@@ -1,6 +1,7 @@
 package com.Shop.service;
 
 import com.Shop.Util.OrderDetailPojo;
+import com.Shop.Util.OrderProductPojo;
 import com.Shop.beans.Address;
 import com.Shop.beans.Cart;
 import com.Shop.beans.OrderProduct;
@@ -34,7 +35,7 @@ public class OrderService {
 //        orders.setPrices(cart.getPrices());
         int count = 0;
         float prices = 0;
-        List<OrderProduct> os = new ArrayList<>();
+        List<OrderProductPojo> os = new ArrayList<>();
         orders.setSetDate(new Date());
         orders.setUserAddress(address.getDetails());
         orders.setUserPhone(address.getUserphone());
@@ -45,7 +46,8 @@ public class OrderService {
             for(String str:orderProductId) {
                 if (str.equals(String.valueOf(orderProduct.getId()))) {
                     orderProduct.setCartId(0);
-                    os.add(orderProduct);
+                    OrderProductPojo productPojo = new OrderProductPojo(orderProduct);
+                    os.add(productPojo);
                     orderProduct.setOrderId(orders.getId());
                     count += orderProduct.getCount();
                     prices += orderProduct.getProductPrices() * orderProduct.getCount();
@@ -72,9 +74,40 @@ public class OrderService {
             OrderDetailPojo orderDetailPojo = new OrderDetailPojo();
             orderDetailPojo.setOrders(order);
             List<OrderProduct> orderProducts = orderProductDao.findByOrderId(order.getId());
-            orderDetailPojo.setOrderProducts(orderProducts);
+            List<OrderProductPojo> orderProductPojos = new ArrayList<>();
+            for(OrderProduct orderProduct:orderProducts){
+                OrderProductPojo productPojo = new OrderProductPojo(orderProduct);
+                orderProductPojos.add(productPojo);
+            }
+            orderDetailPojo.setOrderProducts(orderProductPojos);
             list.add(orderDetailPojo);
         }
         return list;
+    }
+
+    public Orders findOrder(int id){
+        return ordersDao.findById(id,"Orders");
+    }
+
+    public OrderDetailPojo findOrderDetail(int id,int userId){
+        Orders orders = ordersDao.findOrderByIdAndUserId(id,userId);
+        OrderDetailPojo orderDetailPojo = new OrderDetailPojo();
+        orderDetailPojo.setOrders(orders);
+        List<OrderProduct> orderProducts  = orderProductDao.findByOrderId(orders.getId());
+        List<OrderProductPojo> orderProductPojos = new ArrayList<>();
+        for(OrderProduct orderProduct:orderProducts){
+            OrderProductPojo orderProductPojo = new OrderProductPojo(orderProduct);
+            orderProductPojos.add(orderProductPojo);
+        }
+        orderDetailPojo.setOrderProducts(orderProductPojos);
+        return orderDetailPojo;
+    }
+
+    public OrderProduct findOrderProduct(int id){
+        return orderProductDao.findById(id,"OrderProduct");
+    }
+
+    public void updateOrderProduct(OrderProduct orderProduct){
+        orderProductDao.updateAnyType(orderProduct);
     }
 }

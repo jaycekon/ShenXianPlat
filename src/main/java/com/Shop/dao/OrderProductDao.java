@@ -1,6 +1,7 @@
 package com.Shop.dao;
 
 import com.Shop.beans.OrderProduct;
+import com.Shop.beans.Orders;
 import org.aspectj.weaver.ast.Or;
 import org.hibernate.Session;
 
@@ -38,5 +39,7 @@ public class OrderProductDao extends IBaseDao<OrderProduct> {
         List<OrderProduct> orderProducts = session.createQuery(hql).setParameter("orderId",orderId).list();
         return orderProducts;
     }
+
+
 
 }

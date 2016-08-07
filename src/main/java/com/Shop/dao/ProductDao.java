@@ -25,4 +25,11 @@ public class ProductDao extends IBaseDao<Product> {
         }
 
 
+    public List<Product> findProductByName(String name){
+        Session session = super.openSession();
+        String hql = "from Product where name like:name";
+        List<Product> products = session.createQuery(hql).setParameter("name","%"+name+"%").list();
+        return products;
+    }
+
 }

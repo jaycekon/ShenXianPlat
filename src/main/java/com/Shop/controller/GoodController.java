@@ -1,9 +1,13 @@
 package com.Shop.controller;
 
+import com.Shop.DTO.CommentDto;
 import com.Shop.DTO.DetailDto;
+import com.Shop.DTO.ImageDto;
+import com.Shop.DTO.IndexDto;
 import com.Shop.Util.ProductPojo;
 import com.Shop.beans.Image;
 import com.Shop.beans.Product;
+import com.Shop.service.CommentService;
 import com.Shop.service.GoodService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -23,6 +27,8 @@ import java.util.List;
 public class GoodController {
     @Autowired
     private GoodService goodService;
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(value="addProduct",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     @ResponseBody
@@ -38,12 +44,31 @@ public class GoodController {
     @ResponseBody
     public DetailDto productDetail(int id){
         Product product = goodService.findProductById(id);
-        List<String> list = goodService.findImageByProductId(product.getId());
+        List<ImageDto> list = goodService.findImageByProductId(product.getId());
+        List<CommentDto> commentDtos =commentService.findCommentByGoodId(id);
         DetailDto detailDto = new DetailDto();
         detailDto.setProduct(product);
         detailDto.setImageUrl(list);
+        detailDto.setComments(commentDtos);
         return detailDto;
     }
+
+    @RequestMapping(value="findProduct",method=RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Object findProduct(String name){
+        List<Product> products = goodService.findProductByName(name);
+        IndexDto indexDtos = new IndexDto();
+        if(products!=null){
+            indexDtos.setItems(products);
+            indexDtos.setStatus(0);
+        }else{
+            indexDtos.setStatus(1);
+            indexDtos.setErrorMsg("找不到相关商品");
+        }
+        return indexDtos;
+    }
+
+
 
 
 

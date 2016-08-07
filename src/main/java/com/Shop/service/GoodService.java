@@ -1,5 +1,6 @@
 package com.Shop.service;
 
+import com.Shop.DTO.ImageDto;
 import com.Shop.beans.Image;
 import com.Shop.beans.Product;
 import com.Shop.dao.ImageDao;
@@ -45,11 +46,17 @@ public class GoodService {
         return productDao.findProductByCate(cate);
     }
 
-    public List<String> findImageByProductId(int productId){
+    public List<Product> findProductByName(String name){
+        return productDao.findProductByName(name);
+    }
+
+    public List<ImageDto> findImageByProductId(int productId){
         List<Image> images = imageDao.findByProductId(productId);
-        List<String> list = new ArrayList<>();
+        List<ImageDto> list = new ArrayList<>();
         for(Image image:images){
-            list.add(image.getImageUrl());
+            ImageDto imageDto = new ImageDto();
+            imageDto.setImageUrl(image.getImageUrl());
+            list.add(imageDto);
         }
         return list;
     }
