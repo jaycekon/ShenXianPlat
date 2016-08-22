@@ -9,6 +9,7 @@ public class UserDTO {
     private User user;
     private int state;
     private String errorMsg;
+    private int cartCount;
 
     public User getUser() {
         return user;
@@ -32,5 +33,13 @@ public class UserDTO {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    public int getCartCount() {
+        return cartCount;
+    }
+
+    public void setCartCount(int cartCount) {
+        this.cartCount = cartCount;
     }
 }

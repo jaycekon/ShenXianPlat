@@ -14,8 +14,8 @@ import java.util.Date;
 public class Comment {
     private int id;
     private String detail;
-    private Date commentDate;
-    private int start;
+    private String commentDate;
+    private String star;
     private String username;
     private String userImage;
     private int goodId;
@@ -40,20 +40,20 @@ public class Comment {
         this.detail = detail;
     }
 
-    public Date getCommentDate() {
+    public String getCommentDate() {
         return commentDate;
     }
 
-    public void setCommentDate(Date commentDate) {
+    public void setCommentDate(String commentDate) {
         this.commentDate = commentDate;
     }
 
-    public int getStart() {
-        return start;
+    public String getStar() {
+        return star;
     }
 
-    public void setStart(int start) {
-        this.start = start;
+    public void setStar(String star) {
+        this.star = star;
     }
 
     public String getUsername() {

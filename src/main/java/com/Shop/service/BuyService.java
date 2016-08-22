@@ -39,7 +39,7 @@ public class BuyService {
         }
         Product product = productDao.findById(productId,"Product");
         if(product.getNum()<count){
-            jsonObject.addProperty("status",false);
+            jsonObject.addProperty("status",1);
             jsonObject.addProperty("message","库存不足");
             return jsonObject.toString();
         }
@@ -64,6 +64,7 @@ public class BuyService {
             flag = 1;
         }
         orderProduct.setCount(orderProduct.getCount()+count);
+        orderProduct.setPreprice(product.getPrePrice());
         orderProduct.setProductDescripes(product.getName());
         orderProduct.setProductName(product.getName());
         orderProduct.setImg(product.getImage());
@@ -75,7 +76,8 @@ public class BuyService {
         }else {
             orderProductDao.addAnyType(orderProduct);
         }
-        jsonObject.addProperty("status",true);
+        jsonObject.addProperty("status",0);
+        jsonObject.addProperty("cartCount",cart.getCount());
         return jsonObject.toString();
     }
 
@@ -87,7 +89,7 @@ public class BuyService {
         OrderProduct orderProduct  = orderProductDao.findById(id,"OrderProduct");
         JsonObject jsonObject = new JsonObject();
         if(orderProduct==null) {
-            jsonObject.addProperty("status",false);
+            jsonObject.addProperty("status",1);
             jsonObject.addProperty("message","找不到对应项");
             return jsonObject.toString();
         }
@@ -96,7 +98,8 @@ public class BuyService {
         cart.setPrices(cart.getPrices()-orderProduct.getProductPrices()*orderProduct.getCount());
         cartDao.updateAnyType(cart);
         orderProductDao.deleteAnyType(orderProduct);
-        jsonObject.addProperty("status",true);
+        jsonObject.addProperty("status",0);
+        jsonObject.addProperty("cartCount",cart.getCount());
         return jsonObject.toString();
 
     }
@@ -105,14 +108,14 @@ public class BuyService {
         JsonObject jsonObject = new JsonObject();
         OrderProduct orderProduct = orderProductDao.findById(id,"OrderProduct");
         if(orderProduct==null){
-            jsonObject.addProperty("status",false);
+            jsonObject.addProperty("status",1);
             jsonObject.addProperty("message","找不到该项");
             return  jsonObject.toString();
         }
         int num = orderProduct.getCount();
         Cart cart = cartDao.findById(orderProduct.getCartId(),"Cart");
         if(cart==null){
-            jsonObject.addProperty("status",false);
+            jsonObject.addProperty("status",1);
             jsonObject.addProperty("message","找不到该项");
             return  jsonObject.toString();
         }
@@ -128,15 +131,18 @@ public class BuyService {
         cartDao.updateAnyType(cart);
         orderProduct.setCount(count);
         orderProductDao.updateAnyType(orderProduct);
-        jsonObject.addProperty("status",true);
+        jsonObject.addProperty("status",0);
         return jsonObject.toString();
     }
 
-    public boolean addCount(int id){
+    public String addCount(int id){
+        JsonObject jsonObject = new JsonObject();
         OrderProduct orderProduct   = orderProductDao.findById(id,"OrderProduct");
         Product product = productDao.findById(orderProduct.getProductId(),"Product");
         if((orderProduct.getCount()+1) > product.getNum()){
-            return false;
+            jsonObject.addProperty("status",1);
+            jsonObject.addProperty("errMsg","库存不足");
+            return jsonObject.toString();
         }
         orderProduct.setCount(orderProduct.getCount()+1);
         Cart cart = cartDao.findById(orderProduct.getCartId(),"Cart");
@@ -144,13 +150,18 @@ public class BuyService {
         cart.setPrices(orderProduct.getProductPrices()+cart.getPrices());
         orderProductDao.updateAnyType(orderProduct);
         cartDao.updateAnyType(cart);
-        return true;
+        jsonObject.addProperty("status",0);
+        jsonObject.addProperty("cartCount",cart.getCount());
+        return jsonObject.toString();
     }
 
-    public boolean subCount(int id){
+    public String subCount(int id){
+        JsonObject jsonObject = new JsonObject();
         OrderProduct orderProduct   = orderProductDao.findById(id,"OrderProduct");
         if(orderProduct.getCount()<=1){
-            return false;
+            jsonObject.addProperty("status",1);
+            jsonObject.addProperty("errMsg","最近是最少的数量");
+            return jsonObject.toString();
         }
         orderProduct.setCount(orderProduct.getCount()-1);
         Cart cart = cartDao.findById(orderProduct.getCartId(),"Cart");
@@ -158,7 +169,9 @@ public class BuyService {
         cart.setPrices(cart.getPrices()-orderProduct.getProductPrices());
         orderProductDao.updateAnyType(orderProduct);
         cartDao.updateAnyType(cart);
-        return true;
+        jsonObject.addProperty("status",0);
+        jsonObject.addProperty("cartCount",cart.getCount());
+        return jsonObject.toString();
     }
 
 }

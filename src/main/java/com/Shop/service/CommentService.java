@@ -6,6 +6,7 @@ import com.Shop.beans.User;
 import com.Shop.dao.CommentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,9 @@ public class CommentService {
     private CommentDao commentDao;
 
     public void addComment(Comment comment,User user){
-        comment.setCommentDate(new Date());
+        String data= "yyyy-MM-dd hh:mm:ss";
+        SimpleDateFormat smf = new SimpleDateFormat(data);
+        comment.setCommentDate(smf.format(new Date()));
         comment.setUserId(user.getId());
         comment.setUserImage(user.getImg());
         comment.setUsername(user.getNickname());
@@ -31,13 +34,11 @@ public class CommentService {
         return commentDao.findCommentByUserId(userId);
     }
 
-    public List<CommentDto> findCommentByGoodId(int goodId){
-        List<CommentDto> commentDtos = new ArrayList<>();
+    public List<Comment> findCommentByGoodId(int goodId){
+        List<Comment> commentDtos = new ArrayList<>();
         List<Comment> comments =commentDao.findCommentByGoodId(goodId);
         for(Comment comment:comments){
-            CommentDto commentDto = new CommentDto();
-            commentDto.setComment(comment);
-            commentDtos.add(commentDto);
+            commentDtos.add(comment);
         }
         return commentDtos;
     }

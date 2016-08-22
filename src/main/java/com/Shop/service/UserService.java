@@ -11,13 +11,14 @@ import com.Shop.beans.User;
 import com.Shop.dao.CartDao;
 import com.Shop.dao.UserDao;
 import com.google.gson.JsonObject;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 public class UserService {
     @Autowired
     private UserDao userDao;
     @Autowired
     private CartDao cartDao;
-
+    Logger log = Logger.getLogger(this.getClass());
 
 
 
@@ -51,12 +52,13 @@ public class UserService {
         User user=userDao.loginUser(phone);
         UserDTO userDTO = new UserDTO();
         if(user==null){
-            userDTO.setState(0);
+            userDTO.setState(1);
             userDTO.setErrorMsg("账号错误，找不到用户");
         }else if(!user.getPassword().equals(password)){
             userDTO.setState(1);
             userDTO.setErrorMsg("密码错误");
         }else{
+            log.info("=====================>"+user.getPhone()+","+user.getPassword());
             userDTO.setUser(user);
         }
         return userDTO;

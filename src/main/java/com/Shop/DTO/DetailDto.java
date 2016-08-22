@@ -11,7 +11,7 @@ import java.util.List;
 public class DetailDto {
     private Product detail;
     private List<ImageDto> imageUrl;
-    private List<CommentDto> comments;
+    private List<Comment> comments;
 
     public Product getProduct() {
         return detail;
@@ -29,11 +29,11 @@ public class DetailDto {
         this.imageUrl = imageUrl;
     }
 
-    public List<CommentDto> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<CommentDto> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 }

@@ -5,6 +5,7 @@
  */
 package com.Shop.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -16,12 +17,28 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="User")
-public class User{
+public class User implements Serializable{
     private int id;
     private String phone;
     private String Email;
     private Date birthDay;
     private String sex;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", phone='" + phone + '\'' +
+                ", Email='" + Email + '\'' +
+                ", birthDay=" + birthDay +
+                ", sex='" + sex + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
+                ", img='" + img + '\'' +
+                ", type=" + type +
+                '}';
+    }
+
     private String nickname;
     private String password;
     private String img;

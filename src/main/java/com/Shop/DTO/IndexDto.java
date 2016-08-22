@@ -11,6 +11,7 @@ public class IndexDto {
     private List<Product> items;
     private int status;
     private String errorMsg;
+    private List<ImageDto> images;
 
     public List<Product> getItems() {
         return items;
@@ -34,5 +35,13 @@ public class IndexDto {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    public List<ImageDto> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageDto> images) {
+        this.images = images;
     }
 }

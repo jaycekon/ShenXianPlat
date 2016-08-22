@@ -22,6 +22,8 @@ public class OrderProduct {
     private int ProductId;
     private int OrderId;
     private String img;
+    private int userId;
+    private float preprice;
 
     @Id
     @GeneratedValue
@@ -111,5 +113,21 @@ public class OrderProduct {
 
     public void setComment(int comment) {
         this.comment = comment;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public float getPreprice() {
+        return preprice;
+    }
+
+    public void setPreprice(float preprice) {
+        this.preprice = preprice;
     }
 }

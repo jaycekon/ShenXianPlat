@@ -15,4 +15,11 @@ public class AddressDao extends IBaseDao<Address> {
         List<Address> addresses = session.createQuery(hql).setParameter("userId",userId).list();
         return addresses;
     }
+
+    public Address findAddressByFlag(int flag,int userId){
+        Session session  = super.openSession();
+        String hql= "from Address where flag=:flag and userId=:userId";
+        Address addresses = (Address)session.createQuery(hql).setParameter("flag",flag).setParameter("userId",userId).uniqueResult();
+        return addresses;
+    }
 }

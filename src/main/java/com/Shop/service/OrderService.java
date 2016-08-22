@@ -9,9 +9,11 @@ import com.Shop.beans.Orders;
 import com.Shop.dao.CartDao;
 import com.Shop.dao.OrderProductDao;
 import com.Shop.dao.OrdersDao;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +28,7 @@ public class OrderService {
     private CartDao cartDao;
     @Autowired
     private OrderProductDao orderProductDao;
-
+    Logger log = Logger.getLogger(this.getClass());
     public  OrderDetailPojo addOrders(int userId,Address address,String[] orderProductId){
         Cart cart = cartDao.findByUserId(userId);
         Orders orders =new Orders();
@@ -35,8 +37,10 @@ public class OrderService {
 //        orders.setPrices(cart.getPrices());
         int count = 0;
         float prices = 0;
-        List<OrderProductPojo> os = new ArrayList<>();
-        orders.setSetDate(new Date());
+        List<OrderProduct> os = new ArrayList<>();
+        String data = "yyyy-MM-dd hh:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(data);
+        orders.setSetDate(simpleDateFormat.format(new Date()));
         orders.setUserAddress(address.getDetails());
         orders.setUserPhone(address.getUserphone());
         orders.setUserName(address.getUsername());
@@ -46,8 +50,7 @@ public class OrderService {
             for(String str:orderProductId) {
                 if (str.equals(String.valueOf(orderProduct.getId()))) {
                     orderProduct.setCartId(0);
-                    OrderProductPojo productPojo = new OrderProductPojo(orderProduct);
-                    os.add(productPojo);
+                    os.add(orderProduct);
                     orderProduct.setOrderId(orders.getId());
                     count += orderProduct.getCount();
                     prices += orderProduct.getProductPrices() * orderProduct.getCount();
@@ -74,15 +77,18 @@ public class OrderService {
             OrderDetailPojo orderDetailPojo = new OrderDetailPojo();
             orderDetailPojo.setOrders(order);
             List<OrderProduct> orderProducts = orderProductDao.findByOrderId(order.getId());
-            List<OrderProductPojo> orderProductPojos = new ArrayList<>();
+            List<OrderProduct> orderProductPojos = new ArrayList<>();
             for(OrderProduct orderProduct:orderProducts){
-                OrderProductPojo productPojo = new OrderProductPojo(orderProduct);
-                orderProductPojos.add(productPojo);
+                orderProductPojos.add(orderProduct);
             }
             orderDetailPojo.setOrderProducts(orderProductPojos);
             list.add(orderDetailPojo);
         }
         return list;
+    }
+
+    public void updateOrders(Orders orders){
+        ordersDao.updateAnyType(orders);
     }
 
     public Orders findOrder(int id){
@@ -94,10 +100,9 @@ public class OrderService {
         OrderDetailPojo orderDetailPojo = new OrderDetailPojo();
         orderDetailPojo.setOrders(orders);
         List<OrderProduct> orderProducts  = orderProductDao.findByOrderId(orders.getId());
-        List<OrderProductPojo> orderProductPojos = new ArrayList<>();
+        List<OrderProduct> orderProductPojos = new ArrayList<>();
         for(OrderProduct orderProduct:orderProducts){
-            OrderProductPojo orderProductPojo = new OrderProductPojo(orderProduct);
-            orderProductPojos.add(orderProductPojo);
+            orderProductPojos.add(orderProduct);
         }
         orderDetailPojo.setOrderProducts(orderProductPojos);
         return orderDetailPojo;
@@ -109,5 +114,23 @@ public class OrderService {
 
     public void updateOrderProduct(OrderProduct orderProduct){
         orderProductDao.updateAnyType(orderProduct);
+    }
+
+    public boolean deleteOrder(int orderId,int userId){
+        Orders orders = ordersDao.findById(orderId,"Orders");
+        log.info(orders.getUserId());
+        if(orders.getUserId()!=userId){
+            return false;
+        }
+        List<OrderProduct> orderProducts = orderProductDao.findByOrderId(orderId);
+        for(OrderProduct orderProduct:orderProducts){
+            orderProductDao.deleteAnyType(orderProduct);
+        }
+        ordersDao.deleteAnyType(orders);
+        return true;
+    }
+
+    public List<OrderProduct> findOrderPorductByCartId(int cartId){
+        return orderProductDao.findByCartId(cartId);
     }
 }

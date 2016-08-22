@@ -22,9 +22,9 @@ public class Orders {
     private String streamCode;          //物流单号
     private String streamName;          //物流公司名
     private int userId;                  //用户ID
-    private Date setDate;               //下单时间
-    private Date payDate;               //付款时间
-    private Date sentDate;              //发货时间
+    private String setDate;               //下单时间
+    private String payDate;               //付款时间
+    private String sentDate;              //发货时间
 
     @Id
     @GeneratedValue
@@ -109,27 +109,27 @@ public class Orders {
         this.userId = userId;
     }
 
-    public Date getSetDate() {
+    public String getSetDate() {
         return setDate;
     }
 
-    public void setSetDate(Date setDate) {
+    public void setSetDate(String setDate) {
         this.setDate = setDate;
     }
 
-    public Date getPayDate() {
+    public String getPayDate() {
         return payDate;
     }
 
-    public void setPayDate(Date payDate) {
+    public void setPayDate(String payDate) {
         this.payDate = payDate;
     }
 
-    public Date getSentDate() {
+    public String getSentDate() {
         return sentDate;
     }
 
-    public void setSentDate(Date sentDate) {
+    public void setSentDate(String sentDate) {
         this.sentDate = sentDate;
     }
 }

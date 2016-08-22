@@ -61,5 +61,14 @@ public class GoodService {
         return list;
     }
 
+    public List<String> findImage(int productId){
+        List<Image> images = imageDao.findByProductId(productId);
+        List<String> list = new ArrayList<>();
+        for(Image image:images){
+            list.add(image.getImageUrl());
+        }
+        return list;
+    }
+
 
 }

@@ -19,7 +19,6 @@ public class IBaseDao<T> extends BaseDao {
     public void deleteAnyType(T t){
         Session session =super.openSession();
         session.delete(t);
-        session.beginTransaction().commit();
     }
 
     public void updateAnyType(T t){
