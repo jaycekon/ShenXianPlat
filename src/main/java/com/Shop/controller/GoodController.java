@@ -12,16 +12,18 @@ import com.Shop.service.CommentService;
 import com.Shop.service.GoodService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Administrator on 2016/6/30.
@@ -33,14 +35,9 @@ public class GoodController {
     @Autowired
     private CommentService commentService;
         Logger logger = Logger.getLogger(this.getClass());
-    @RequestMapping(value="addProduct",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public String productAdd(Product product){
-        goodService.addProduct(product);
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("status","true");
-        return jsonObject.toString();
-    }
+
+
+
 
 
     @RequestMapping(value="/Detail",method = RequestMethod.GET)
@@ -71,6 +68,12 @@ public class GoodController {
         }
         return indexDtos;
     }
+
+
+
+
+
+
 
 
 

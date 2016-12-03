@@ -17,6 +17,13 @@ public class OrdersDao extends IBaseDao<Orders> {
         return orderses;
     }
 
+    public List<Orders> findOrdersByStatus(int status){
+        Session session = super.openSession();
+        String hql="from Orders where status=:status order by setDate";
+        List<Orders> orderses = session.createQuery(hql).setParameter("status",status).list();
+        return orderses;
+    }
+
     public Orders findOrderByIdAndUserId(int id,int userId){
         Session session =super.openSession();
         String hql="from Orders where id=:id and userId=:userId";

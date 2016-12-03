@@ -9,6 +9,7 @@ import com.Shop.Util.ProductPojo;
 import com.Shop.Util.UserAgentUtil;
 import com.Shop.beans.Cate;
 import com.Shop.beans.Product;
+import com.Shop.beans.User;
 import com.Shop.service.BackStageService;
 import com.Shop.service.GoodService;
 import com.google.gson.Gson;
@@ -87,5 +88,16 @@ public class IndexController {
         IndexDto indexDto = new IndexDto();
         indexDto.setItems(products);
         return indexDto;
+    }
+
+
+    @RequestMapping(value = "/getPost",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public User getJson(String name,String password){
+        User user = new User();
+        user.setNickname(name);
+        user.setPassword(password);
+        System.out.println(user.toString());
+        return user;
     }
 }

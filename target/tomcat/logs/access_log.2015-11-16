@@ -1,4 +1,0 @@
-0:0:0:0:0:0:0:1 - - [16/Nov/2015:21:02:20 +0800] "GET /Shop/users HTTP/1.1" 200 323 http-bio-80-exec-1 2232
-0:0:0:0:0:0:0:1 - - [16/Nov/2015:21:02:20 +0800] "GET /Shop/app/ajax/index.js HTTP/1.1" 200 270 http-bio-80-exec-2 14
-0:0:0:0:0:0:0:1 - - [16/Nov/2015:21:02:20 +0800] "GET /Shop/app/ajax/jquery-1.11.2.js HTTP/1.1" 200 294530 http-bio-80-exec-7 91
-0:0:0:0:0:0:0:1 - - [16/Nov/2015:21:02:24 +0800] "GET /Shop/test HTTP/1.1" 200 232 http-bio-80-exec-9 1052

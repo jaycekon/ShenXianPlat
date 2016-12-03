@@ -23,22 +23,6 @@ public class User implements Serializable{
     private String Email;
     private Date birthDay;
     private String sex;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", phone='" + phone + '\'' +
-                ", Email='" + Email + '\'' +
-                ", birthDay=" + birthDay +
-                ", sex='" + sex + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", password='" + password + '\'' +
-                ", img='" + img + '\'' +
-                ", type=" + type +
-                '}';
-    }
-
     private String nickname;
     private String password;
     private String img;
@@ -119,4 +103,19 @@ public class User implements Serializable{
         this.type = type;
     }
 
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", phone='" + phone + '\'' +
+                ", Email='" + Email + '\'' +
+                ", birthDay=" + birthDay +
+                ", sex='" + sex + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
+                ", img='" + img + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }

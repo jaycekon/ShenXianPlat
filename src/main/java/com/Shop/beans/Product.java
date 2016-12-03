@@ -162,4 +162,26 @@ public class Product {
     public void setIndes(int indes) {
         this.indes = indes;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
+                ", weight='" + weight + '\'' +
+                ", introduce='" + introduce + '\'' +
+                ", price=" + price +
+                ", prePrice=" + prePrice +
+                ", num=" + num +
+                ", saleCount=" + saleCount +
+                ", cate='" + cate + '\'' +
+                ", status=" + status +
+                ", indes=" + indes +
+                ", image='" + image + '\'' +
+                ", createDate=" + createDate +
+                ", supDate=" + supDate +
+                ", downDate=" + downDate +
+                '}';
+    }
 }

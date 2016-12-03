@@ -236,15 +236,21 @@ public class UserController {
     @RequestMapping(value="OrderDetail",method =RequestMethod.GET,produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Object orderDetail(int id,HttpSession session,String phone,String password){
-//        User user = (User)session.getAttribute("loginUser");
-//        if(user==null){
-//            JsonObject jsonObject = new JsonObject();
-//            jsonObject.addProperty("status",1);
-//            jsonObject.addProperty("errorMsg","用户未登陆");
-//            return jsonObject.toString();
-//        }
+        User user = (User)session.getAttribute("loginUser");
+        if(phone!=null){
+            UserDTO userDTO = userService.loginUser(phone,password);
+            if(userDTO.getUser()!=null){
+                user =userDTO.getUser();
+            }
+        }
+        if(user==null){
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("status",1);
+            jsonObject.addProperty("errorMsg","用户未登陆");
+            return jsonObject.toString();
+        }
 
-        OrderDetailPojo orderDetailPojo = orderService.findOrderDetail(id,1);
+        OrderDetailPojo orderDetailPojo = orderService.findOrderDetail(id,user.getId());
         return orderDetailPojo;
     }
 
@@ -315,10 +321,21 @@ public class UserController {
             loginUser.setSex(user.getSex());
         }
         userService.updateUser(loginUser);
-
+        session.setAttribute("loginUser",loginUser);
         jsonObject.addProperty("status",0);
         jsonObject.addProperty("message","修改成功");
         return jsonObject.toString();
+    }
+
+    @RequestMapping(value = "getUserMessage",method=RequestMethod.GET)
+    @ResponseBody
+    public Object getUserMessage(HttpSession session){
+        if(session.getAttribute("loginUser")!=null){
+            UserDTO userDTO = new UserDTO();
+            userDTO.setUser((User)session.getAttribute("loginUser"));
+            return userDTO;
+        }
+        return null;
     }
 
 

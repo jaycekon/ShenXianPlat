@@ -25,6 +25,10 @@ public class GoodService {
         productDao.addAnyType(product);
     }
 
+    public void addImage(Image image){
+        imageDao.addAnyType(image);
+    }
+
 
     public void updateProduct(Product product){
         productDao.deleteAnyType(product);
@@ -40,6 +44,10 @@ public class GoodService {
 
     public List<Product> findProductByIndex(){
         return productDao.findProductByIndex();
+    }
+
+    public List<Product> findAll(){
+        return  productDao.findAll("Product");
     }
 
     public List<Product> findProductByCate(String cate){

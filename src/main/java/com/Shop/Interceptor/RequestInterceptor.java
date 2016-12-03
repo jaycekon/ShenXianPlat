@@ -19,21 +19,11 @@ public class RequestInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         boolean flag = UserAgentUtil.isMobileDevice(request);
         System.out.println(flag);
-//        if(!flag){
-////            response.setHeader("Access-Control-Allow-Origin", "*");
-////            response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-////            response.setHeader("Access-Control-Allow-Headers", "x-requested-with,content-type");
-//
-//            response.addHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
-//            response.addHeader("Access-Control-Allow-Methods","*");
-//            response.addHeader("Access-Control-Max-Age","100");
-//            response.addHeader("Access-Control-Allow-Headers", "Content-Type");
-//            response.addHeader("Access-Control-Allow-Credentials","true");
 
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+        response.setHeader("Access-Control-Allow-Headers", "Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, Content-Language, Cache-Control, X-E4M-With");
         response.setHeader("Access-Control-Allow-Credentials","true"); //是否支持cookie跨域
 //        }
         return true;

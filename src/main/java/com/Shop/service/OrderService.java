@@ -38,7 +38,7 @@ public class OrderService {
         int count = 0;
         float prices = 0;
         List<OrderProduct> os = new ArrayList<>();
-        String data = "yyyy-MM-dd hh:mm:ss";
+        String data = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(data);
         orders.setSetDate(simpleDateFormat.format(new Date()));
         orders.setUserAddress(address.getDetails());
@@ -87,6 +87,41 @@ public class OrderService {
         return list;
     }
 
+    public List<OrderDetailPojo> findAll(){
+        List<Orders> orders = ordersDao.findAll("Orders");
+        List<OrderDetailPojo> list = new ArrayList<>();
+        for(Orders order :orders){
+            OrderDetailPojo orderDetailPojo = new OrderDetailPojo();
+            orderDetailPojo.setOrders(order);
+            List<OrderProduct> orderProducts = orderProductDao.findByOrderId(order.getId());
+            List<OrderProduct> orderProductPojos = new ArrayList<>();
+            for(OrderProduct orderProduct:orderProducts){
+                orderProductPojos.add(orderProduct);
+            }
+            orderDetailPojo.setOrderProducts(orderProductPojos);
+            list.add(orderDetailPojo);
+        }
+        return list;
+    }
+
+
+    public List<OrderDetailPojo> findByStatus(int status){
+        List<Orders> orders = ordersDao.findOrdersByStatus(status);
+        List<OrderDetailPojo> list = new ArrayList<>();
+        for(Orders order :orders){
+            OrderDetailPojo orderDetailPojo = new OrderDetailPojo();
+            orderDetailPojo.setOrders(order);
+            List<OrderProduct> orderProducts = orderProductDao.findByOrderId(order.getId());
+            List<OrderProduct> orderProductPojos = new ArrayList<>();
+            for(OrderProduct orderProduct:orderProducts){
+                orderProductPojos.add(orderProduct);
+            }
+            orderDetailPojo.setOrderProducts(orderProductPojos);
+            list.add(orderDetailPojo);
+        }
+        return list;
+    }
+
     public void updateOrders(Orders orders){
         ordersDao.updateAnyType(orders);
     }
@@ -97,6 +132,19 @@ public class OrderService {
 
     public OrderDetailPojo findOrderDetail(int id,int userId){
         Orders orders = ordersDao.findOrderByIdAndUserId(id,userId);
+        OrderDetailPojo orderDetailPojo = new OrderDetailPojo();
+        orderDetailPojo.setOrders(orders);
+        List<OrderProduct> orderProducts  = orderProductDao.findByOrderId(orders.getId());
+        List<OrderProduct> orderProductPojos = new ArrayList<>();
+        for(OrderProduct orderProduct:orderProducts){
+            orderProductPojos.add(orderProduct);
+        }
+        orderDetailPojo.setOrderProducts(orderProductPojos);
+        return orderDetailPojo;
+    }
+
+    public OrderDetailPojo findOrderDetail(int id){
+        Orders orders = ordersDao.findById(id,"Orders");
         OrderDetailPojo orderDetailPojo = new OrderDetailPojo();
         orderDetailPojo.setOrders(orders);
         List<OrderProduct> orderProducts  = orderProductDao.findByOrderId(orders.getId());

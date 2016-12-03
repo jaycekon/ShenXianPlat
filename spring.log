@@ -1,189 +1,113 @@
-10:45:46,485 INFO  [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started
-10:45:46,553 INFO  [org.springframework.web.context.support.XmlWebApplicationContext] Refreshing Root WebApplicationContext: startup date [Fri Mar 11 10:45:46 CST 2016]; root of context hierarchy
-10:45:46,583 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext.xml]
-10:45:47,744 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Mar 11 10:45:46 CST 2016]; root of context hierarchy
-10:45:47,847 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Mar 11 10:45:46 CST 2016]; root of context hierarchy
-10:45:48,160 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
-10:45:48,165 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.1.6.Final}
-10:45:48,167 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
-10:45:48,169 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
-10:45:49,560 WARN  [org.hibernate.engine.jdbc.internal.JdbcServicesImpl] HHH000342: Could not obtain connection to query metadata : Cannot create PoolableConnectionFactory (Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.)
-10:45:49,564 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-10:45:49,570 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000422: Disabling contextual LOB creation as connection was null
-10:45:49,577 INFO  [org.hibernate.engine.transaction.internal.TransactionFactoryInitiator] HHH000399: Using default transaction strategy (direct JDBC transactions)
-10:45:49,580 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
-10:45:49,609 WARN  [net.sf.ehcache.config.ConfigurationFactory] No configuration found. Configuring ehcache from ehcache-failsafe.xml  found in the classpath: jar:file:/C:/Users/Administrator/.m2/repository/net/sf/ehcache/ehcache-core/2.6.10/ehcache-core-2.6.10.jar!/ehcache-failsafe.xml
-10:45:49,694 INFO  [org.hibernate.cache.spi.UpdateTimestampsCache] HHH000250: Starting update timestamps cache at region: org.hibernate.cache.spi.UpdateTimestampsCache
-10:45:49,696 WARN  [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory] HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.spi.UpdateTimestampsCache]; using defaults.
-10:45:49,724 INFO  [org.hibernate.cache.internal.StandardQueryCache] HHH000248: Starting query cache at region: org.hibernate.cache.internal.StandardQueryCache
-10:45:49,724 WARN  [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory] HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.internal.StandardQueryCache]; using defaults.
-10:45:50,201 INFO  [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000228: Running hbm2ddl schema update
-10:45:50,201 INFO  [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000102: Fetching database metadata
-10:45:51,212 ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000319: Could not get database metadata
-org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.)
-	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1549)
-	at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1388)
-	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044)
-	at org.hibernate.service.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:141)
-	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51)
-	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194)
-	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178)
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:492)
-	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1746)
-	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1784)
-	at org.springframework.orm.hibernate4.LocalSessionFactoryBuilder.buildSessionFactory(LocalSessionFactoryBuilder.java:372)
-	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:454)
-	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.afterPropertiesSet(LocalSessionFactoryBean.java:439)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
-	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
-	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
-	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
-	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939)
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
-	at com.mysql.jdbc.Util.handleNewInstance(Util.java:377)
-	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:1036)
-	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:338)
-	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2232)
-	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2265)
-	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2064)
-	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:790)
-	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:44)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
-	at com.mysql.jdbc.Util.handleNewInstance(Util.java:377)
-	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:395)
-	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:325)
-	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38)
-	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582)
-	at org.apache.commons.dbcp.BasicDataSource.validateConnectionFactory(BasicDataSource.java:1556)
-	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1545)
-	... 35 more
-Caused by: java.net.ConnectException: Connection refused: connect
-	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
-	at java.net.Socket.connect(Socket.java:589)
-	at java.net.Socket.connect(Socket.java:538)
-	at java.net.Socket.<init>(Socket.java:434)
-	at java.net.Socket.<init>(Socket.java:244)
-	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:243)
-	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:297)
-	... 51 more
-10:45:51,217 ERROR [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000299: Could not complete schema update
-org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.)
-	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1549)
-	at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1388)
-	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044)
-	at org.hibernate.service.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:141)
-	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51)
-	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194)
-	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178)
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:492)
-	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1746)
-	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1784)
-	at org.springframework.orm.hibernate4.LocalSessionFactoryBuilder.buildSessionFactory(LocalSessionFactoryBuilder.java:372)
-	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:454)
-	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.afterPropertiesSet(LocalSessionFactoryBean.java:439)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
-	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
-	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
-	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
-	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939)
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
-	at com.mysql.jdbc.Util.handleNewInstance(Util.java:377)
-	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:1036)
-	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:338)
-	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2232)
-	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2265)
-	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2064)
-	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:790)
-	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:44)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
-	at com.mysql.jdbc.Util.handleNewInstance(Util.java:377)
-	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:395)
-	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:325)
-	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38)
-	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582)
-	at org.apache.commons.dbcp.BasicDataSource.validateConnectionFactory(BasicDataSource.java:1556)
-	at org.apache.commons.dbcp.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:1545)
-	... 35 more
-Caused by: java.net.ConnectException: Connection refused: connect
-	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
-	at java.net.Socket.connect(Socket.java:589)
-	at java.net.Socket.connect(Socket.java:538)
-	at java.net.Socket.<init>(Socket.java:434)
-	at java.net.Socket.<init>(Socket.java:244)
-	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:243)
-	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:297)
-	... 51 more
-10:45:51,264 INFO  [org.springframework.orm.hibernate4.HibernateTransactionManager] Using DataSource [org.apache.commons.dbcp.BasicDataSource@552f76e9] of Hibernate SessionFactory for HibernateTransactionManager
-10:45:51,487 INFO  [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization completed in 5001 ms
+21:44:25,148 INFO  [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started
+21:44:25,230 INFO  [org.springframework.web.context.support.XmlWebApplicationContext] Refreshing Root WebApplicationContext: startup date [Sat Dec 03 21:44:25 CST 2016]; root of context hierarchy
+21:44:25,272 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext.xml]
+21:44:26,610 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Sat Dec 03 21:44:25 CST 2016]; root of context hierarchy
+21:44:26,666 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Sat Dec 03 21:44:25 CST 2016]; root of context hierarchy
+21:44:26,948 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+21:44:26,957 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.1.6.Final}
+21:44:26,960 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+21:44:26,963 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+21:44:28,581 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+21:44:28,604 INFO  [org.hibernate.engine.transaction.internal.TransactionFactoryInitiator] HHH000399: Using default transaction strategy (direct JDBC transactions)
+21:44:28,610 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+21:44:28,654 WARN  [net.sf.ehcache.config.ConfigurationFactory] No configuration found. Configuring ehcache from ehcache-failsafe.xml  found in the classpath: jar:file:/C:/Users/Administrator/.m2/repository/net/sf/ehcache/ehcache-core/2.6.10/ehcache-core-2.6.10.jar!/ehcache-failsafe.xml
+21:44:28,732 INFO  [org.hibernate.cache.spi.UpdateTimestampsCache] HHH000250: Starting update timestamps cache at region: org.hibernate.cache.spi.UpdateTimestampsCache
+21:44:28,735 WARN  [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory] HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.spi.UpdateTimestampsCache]; using defaults.
+21:44:28,774 INFO  [org.hibernate.cache.internal.StandardQueryCache] HHH000248: Starting query cache at region: org.hibernate.cache.internal.StandardQueryCache
+21:44:28,774 WARN  [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory] HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.internal.StandardQueryCache]; using defaults.
+21:44:28,993 INFO  [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000228: Running hbm2ddl schema update
+21:44:28,993 INFO  [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000102: Fetching database metadata
+21:44:28,995 INFO  [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000396: Updating schema
+21:44:29,305 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: Shop.Address
+21:44:29,305 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [area, code, flag, address, a_id, userphone, phone, user_id, details, id, userid, username]
+21:44:29,305 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: []
+21:44:29,305 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [fk1ed033d443a5d96, fk1ed033d4fb50dd2a, primary]
+21:44:29,571 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: Shop.Cart
+21:44:29,571 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [user_id, count, totalprices, id, prices, userid]
+21:44:29,571 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: []
+21:44:29,571 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [fk1fef40fb50dd2a, primary]
+21:44:29,845 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: Shop.Cate
+21:44:29,845 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [name, cate_id, id]
+21:44:29,845 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: []
+21:44:29,846 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [fk1fef6f14eeeb30, primary]
+21:44:30,118 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: Shop.Comment
+21:44:30,118 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [date, star, commentdate, goodid, good_id, userid, user_id, userimage, orderproductid, orderproduct_id, id, detail, text, username]
+21:44:30,118 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: []
+21:44:30,118 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [fk9bde863ffb50dd2a, fk9bde863f6fa9654a, primary]
+21:44:30,395 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: Shop.Image
+21:44:30,395 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [address, productid, imageurl, id, good_id, status]
+21:44:30,396 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: []
+21:44:30,396 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [fk437b93b10665fea, primary]
+21:44:30,693 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: Shop.OrderProduct
+21:44:30,693 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [img, orders_id, productid, preprice, pv, cartid, good_id, userid, uuid, wholesalecount, cart_id, exitorders_id, productname, exitstatus, stauts, id, prices, image, maxcount, orderid, count, areaprofit, commentstatus, productdescripes, describes, roleprofit, productprices, name, comment, status]
+21:44:30,693 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: []
+21:44:30,693 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [fk2c65fde1fe06124a, fk2c65fde12519210a, fk2c65fde134c1baea, primary]
+21:44:30,968 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: Shop.Orders
+21:44:30,968 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [logistic_logis_comp_id, sentdate, setdate, totalpv, areas_id, userid, uuid, paydate, totalprofit, number, id, prices, streamname, carriagecode, address, c, d, userphone, f, count, areaprofit, useraddress, paytime, rolesprofit, senttime, p, settime, t, phone, user_id, roles_id, name, stageprofit, streamcode, paytype, status, username]
+21:44:30,968 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: []
+21:44:30,968 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [fk8d444f05fb50dd2a, fk8d444f056ea6034a, fk8d444f051a4c22aa, primary, fk8d444f05c73f668b]
+21:44:31,233 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: Shop.Product
+21:44:31,233 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [cate, image, preprice, downdate, introduce, num, createdate, weight, title, supdate, indes, price, name, salecount, id, status]
+21:44:31,233 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: []
+21:44:31,233 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [primary]
+21:44:31,500 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: Shop.User
+21:44:31,501 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [birthday, date, img, openid, sex, count, sign, type, realname, password, phone, idcard, roles_id, nickname, id, email, usecount, username]
+21:44:31,501 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: []
+21:44:31,501 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [fk285feb6ea6034a, primary]
+21:44:31,503 INFO  [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000232: Schema update complete
+21:44:31,574 INFO  [org.springframework.orm.hibernate4.HibernateTransactionManager] Using DataSource [org.apache.commons.dbcp.BasicDataSource@49137c76] of Hibernate SessionFactory for HibernateTransactionManager
+21:44:31,913 INFO  [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization completed in 6765 ms
+21:44:40,097 INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet 'Shop': initialization started
+21:44:40,102 INFO  [org.springframework.web.context.support.XmlWebApplicationContext] Refreshing WebApplicationContext for namespace 'Shop-servlet': startup date [Sat Dec 03 21:44:40 CST 2016]; parent: Root WebApplicationContext
+21:44:40,102 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] Loading XML bean definitions from ServletContext resource [/WEB-INF/Shop-servlet.xml]
+21:44:40,505 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/App/Download],methods=[GET]}" onto public void com.Shop.controller.BackStageController.download(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+21:44:40,506 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/addFile]}" onto public java.lang.String com.Shop.controller.BackStageController.addFile(java.lang.String,java.lang.String)
+21:44:40,506 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/addCate],methods=[POST],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BackStageController.addCate(com.Shop.beans.Cate,javax.servlet.http.HttpServletRequest)
+21:44:40,506 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/setImage],methods=[POST],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BackStageController.addGoodDown(org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest)
+21:44:40,506 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/addGoodDown],methods=[POST],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BackStageController.addGoodDown(com.Shop.beans.Product,org.springframework.web.multipart.MultipartFile[])
+21:44:40,506 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/uploadFile],methods=[POST],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BackStageController.addGoodDown(org.springframework.web.multipart.MultipartFile)
+21:44:40,506 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/logOutTerrace],methods=[GET]}" onto public java.lang.String com.Shop.controller.BackStageController.logOutTerrace(javax.servlet.http.HttpSession)
+21:44:40,506 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/BackStage/SendGood],methods=[GET]}" onto public java.lang.String com.Shop.controller.BackStageController.sendGood(int)
+21:44:40,506 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/BackStage/deleteProduct],methods=[GET]}" onto public java.lang.String com.Shop.controller.BackStageController.deleteGood(int)
+21:44:40,507 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/BackStage/ListProduct],methods=[GET]}" onto public java.lang.String com.Shop.controller.BackStageController.listProduct(org.springframework.ui.Model)
+21:44:40,507 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/loginTerrace],methods=[GET]}" onto public java.lang.String com.Shop.controller.BackStageController.loginTerrace()
+21:44:40,507 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/loginTerrace],methods=[POST]}" onto public java.lang.String com.Shop.controller.BackStageController.loginTerrace(com.Shop.beans.User,javax.servlet.http.HttpSession)
+21:44:40,507 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/BackStage/orderDetail],methods=[GET]}" onto public java.lang.String com.Shop.controller.BackStageController.ordersDetail(org.springframework.ui.Model,int)
+21:44:40,507 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/BackStage/AddProduct],methods=[GET]}" onto public java.lang.String com.Shop.controller.BackStageController.productAdd()
+21:44:40,507 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/BackStage/ListOrders],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BackStageController.listOrders(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest)
+21:44:40,511 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/addCount],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BuyController.addCount(int)
+21:44:40,511 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/Comment],methods=[GET || POST],produces=[application/json;charset=UTF-8]}" onto public java.lang.Object com.Shop.controller.BuyController.addComment(int,int,com.Shop.beans.Comment,javax.servlet.http.HttpSession)
+21:44:40,511 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/deleteOrders],methods=[GET || POST],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BuyController.deleteOrders(int,javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest)
+21:44:40,511 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/updateStatus],methods=[GET || POST],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BuyController.updateStatus(int,int)
+21:44:40,511 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/CreateOrders],methods=[GET || POST]}" onto public java.lang.Object com.Shop.controller.BuyController.createOrders(javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest,int)
+21:44:40,511 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/buyGood],methods=[POST || GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BuyController.buyGood(int,int,javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest)
+21:44:40,511 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/myCart],methods=[GET || POST],produces=[application/json;charset=UTF-8]}" onto public java.lang.Object com.Shop.controller.BuyController.myCart(javax.servlet.http.HttpServletRequest)
+21:44:40,511 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/removeGood],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BuyController.removeGood(int,javax.servlet.http.HttpSession)
+21:44:40,511 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/subCount],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BuyController.subCount(int)
+21:44:40,512 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/updateOrderProduct],methods=[POST],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.BuyController.updateOrderProduct(int,int)
+21:44:40,513 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/Detail],methods=[GET]}" onto public com.Shop.DTO.DetailDto com.Shop.controller.GoodController.productDetail(int)
+21:44:40,513 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/findProduct],methods=[GET || POST],produces=[application/json;charset=UTF-8]}" onto public java.lang.Object com.Shop.controller.GoodController.findProduct(java.lang.String)
+21:44:40,515 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/index],methods=[GET]}" onto public java.lang.Object com.Shop.controller.IndexController.index(javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest,java.lang.String)
+21:44:40,515 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/getImage],methods=[GET]}" onto public java.lang.Object com.Shop.controller.IndexController.getImage()
+21:44:40,515 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/Cate],methods=[GET]}" onto public com.Shop.DTO.IndexDto com.Shop.controller.IndexController.findByCate(java.lang.String)
+21:44:40,515 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/getPost],methods=[GET || POST]}" onto public com.Shop.beans.User com.Shop.controller.IndexController.getJson(java.lang.String,java.lang.String)
+21:44:40,518 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/getAddress],methods=[GET || POST]}" onto public java.lang.Object com.Shop.controller.UserController.getAddress(javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest)
+21:44:40,518 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/],methods=[GET]}" onto public java.lang.String com.Shop.controller.UserController.index1()
+21:44:40,518 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/register],methods=[POST || GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.UserController.addUser(com.Shop.beans.User)
+21:44:40,518 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/addAddress],methods=[POST || GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.UserController.addAddress(com.Shop.beans.Address,javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest)
+21:44:40,519 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/updateAddress],methods=[GET || POST]}" onto public java.lang.Object com.Shop.controller.UserController.updateAddress(com.Shop.beans.Address,javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest)
+21:44:40,519 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/deleteAddress],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.UserController.deleteAddress(int)
+21:44:40,519 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/listOrders],methods=[POST || GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.Object com.Shop.controller.UserController.listOrders(javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest)
+21:44:40,519 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/addressDetail],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.String com.Shop.controller.UserController.addressDetail(int)
+21:44:40,519 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/OrderDetail],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.Object com.Shop.controller.UserController.orderDetail(int,javax.servlet.http.HttpSession,java.lang.String,java.lang.String)
+21:44:40,519 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/getUserMessage],methods=[GET]}" onto public java.lang.Object com.Shop.controller.UserController.getUserMessage(javax.servlet.http.HttpSession)
+21:44:40,519 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/CreateOrder],methods=[POST],produces=[application/json;charset=UTF-8]}" onto public java.lang.Object com.Shop.controller.UserController.createOrder(javax.servlet.http.HttpSession,int,javax.servlet.http.HttpServletRequest)
+21:44:40,519 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/listAddress],methods=[POST || GET]}" onto public java.lang.Object com.Shop.controller.UserController.listAddress(javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest)
+21:44:40,519 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/logOut],methods=[POST || GET],produces=[application/json;charset=UTF-8]}" onto public java.lang.Object com.Shop.controller.UserController.loginOut(javax.servlet.http.HttpSession)
+21:44:40,520 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/login],methods=[POST || GET]}" onto public java.lang.Object com.Shop.controller.UserController.loginUser(com.Shop.beans.User,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpSession,javax.servlet.http.HttpServletResponse)
+21:44:40,520 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/list/{id}],methods=[GET]}" onto public java.lang.String com.Shop.controller.UserController.deleteUser(int)
+21:44:40,520 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] Mapped "{[/updateUser],methods=[GET || POST]}" onto public java.lang.Object com.Shop.controller.UserController.updateUser(com.Shop.beans.User,javax.servlet.http.HttpSession,javax.servlet.http.HttpServletRequest)
+21:44:40,546 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter] Looking for @ControllerAdvice: WebApplicationContext for namespace 'Shop-servlet': startup date [Sat Dec 03 21:44:40 CST 2016]; parent: Root WebApplicationContext
+21:44:40,614 INFO  [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter] Looking for @ControllerAdvice: WebApplicationContext for namespace 'Shop-servlet': startup date [Sat Dec 03 21:44:40 CST 2016]; parent: Root WebApplicationContext
+21:44:40,685 INFO  [org.springframework.web.servlet.handler.SimpleUrlHandlerMapping] Mapped URL path [/app/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+21:44:40,805 INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet 'Shop': initialization completed in 708 ms
